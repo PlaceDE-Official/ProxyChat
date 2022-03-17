@@ -23,6 +23,7 @@ package uk.co.notnull.ProxyChat.util;
 
 import java.net.InetSocketAddress;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,6 +52,16 @@ public class DummyPlayer implements Player {
   @Override
   public String getUsername() {
     return "Dummy";
+  }
+
+  @Override
+  public @Nullable Locale getEffectiveLocale() {
+    return null;
+  }
+
+  @Override
+  public void setEffectiveLocale(Locale locale) {
+
   }
 
   @Override

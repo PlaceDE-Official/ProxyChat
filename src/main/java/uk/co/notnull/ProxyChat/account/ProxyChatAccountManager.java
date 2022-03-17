@@ -54,6 +54,7 @@ import uk.co.notnull.ProxyChat.permission.PermissionManager;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -160,6 +161,16 @@ public class ProxyChatAccountManager extends AccountManager {
     @Override
     public String getUsername() {
       return null;
+    }
+
+    @Override
+    public @Nullable Locale getEffectiveLocale() {
+      return null;
+    }
+
+    @Override
+    public void setEffectiveLocale(Locale locale) {
+
     }
 
     @Override
