@@ -49,6 +49,15 @@ public class ProxyDiscordHandler {
 		this.proxyDiscord = (ProxyDiscord) plugin.getProxy().getPluginManager()
 				.getPlugin("proxydiscord").get().getInstance().get();
 
+		this.proxyDiscord.setEmoteProvider((s, builder) -> {
+			if(emoteModule.isEnabled()) {
+				return emoteModule.getEmoteByName(s.toLowerCase())
+						.map(EmoteModule.Emote::getComponent).orElse(builder.build());
+			} else {
+				return builder.build();
+			}
+		});
+
 		plugin.getProxy().getEventManager().register(plugin, this);
 	}
 
@@ -65,7 +74,7 @@ public class ProxyDiscordHandler {
 		}
 
 		if(type == LogType.COMMAND) {
-			String command = event.getLogEntry().getReplacements().get("[command]");
+			String command = event.getLogEntry().getReplacements().get("command");
 
 			if(command.startsWith("l ") || command.startsWith("sc ")
 					|| command.startsWith("global ") || command.startsWith("local ")
@@ -104,7 +113,7 @@ public class ProxyDiscordHandler {
 
 		if(channel == ChannelType.STAFF) {
 			entry.visibility(LogVisibility.PRIVATE_ONLY)
-					.replacements(Map.of("[message]", "[STAFF] " + filtered));
+					.replacements(Map.of("message", "[STAFF] " + filtered));
 		} else {
 			if(channel == ChannelType.GLOBAL) {
 				//TODO: All servers
@@ -115,9 +124,9 @@ public class ProxyDiscordHandler {
 			}
 
 			LogEntry privateEntry = LogEntry.builder(entry).visibility(LogVisibility.PRIVATE_ONLY)
-					.replacements(Map.of("[message]", unfiltered)).build();
+					.replacements(Map.of("message", unfiltered)).build();
 
-			entry.visibility(LogVisibility.PUBLIC_ONLY).replacements(Map.of("[message]", filtered));
+			entry.visibility(LogVisibility.PUBLIC_ONLY).replacements(Map.of("message", filtered));
 			proxyDiscord.getLoggingManager().logEvent(privateEntry);
 		}
 
