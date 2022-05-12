@@ -108,9 +108,9 @@ public class ProxyChat implements ProxyChatApi {
   }
 
   /** For unit tests only! */
-  protected ProxyChat(ProxyServer proxy, PluginDescription description) {
+  protected ProxyChat(ProxyServer proxy, Logger logger, PluginDescription description) {
     this.proxy = proxy;
-    this.logger = null;
+    this.logger = logger;
   }
 
   public void onLoad() {

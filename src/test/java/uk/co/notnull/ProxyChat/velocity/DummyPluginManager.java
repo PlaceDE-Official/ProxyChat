@@ -19,26 +19,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package uk.co.notnull.ProxyChat.module;
+package uk.co.notnull.ProxyChat.velocity;
 
-import uk.co.notnull.ProxyChat.command.HelpOpCommand;
+import com.velocitypowered.api.plugin.PluginContainer;
+import com.velocitypowered.api.plugin.PluginManager;
 
-public class HelpOpModule extends Module {
-  private HelpOpCommand helpOpCommand;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Optional;
 
-  @Override
-  public String getName() {
-    return "HelpOp";
-  }
+public class DummyPluginManager implements PluginManager {
+	@Override
+	public Optional<PluginContainer> fromInstance(Object instance) {
+		return Optional.empty();
+	}
 
-  @Override
-  public void onEnable() {
-    helpOpCommand = new HelpOpCommand(this);
-    helpOpCommand.register();
-  }
+	@Override
+	public Optional<PluginContainer> getPlugin(String id) {
+		return Optional.empty();
+	}
 
-  @Override
-  public void onDisable() {
-    helpOpCommand.unregister();
-  }
+	@Override
+	public Collection<PluginContainer> getPlugins() {
+		return null;
+	}
+
+	@Override
+	public boolean isLoaded(String id) {
+		return false;
+	}
+
+	@Override
+	public void addToClasspath(Object plugin, Path path) {
+
+	}
 }

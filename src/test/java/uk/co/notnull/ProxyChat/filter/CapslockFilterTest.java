@@ -29,7 +29,7 @@ import uk.co.notnull.ProxyChat.message.Messages;
 import org.junit.Test;
 
 public class CapslockFilterTest {
-  private static ProxyChatFilter FILTER = new CapslockFilter(8, 50, true);
+  private static final ProxyChatFilter<String> FILTER = new CapslockFilter(8, 50, true);
   private static final FilterHelper filterHelper = new FilterHelper(Messages.ANTI_CAPSLOCK);
 
   @Test
@@ -50,7 +50,7 @@ public class CapslockFilterTest {
 
   @Test
   public void consoleTest() {
-    final ProxyChatFilter filter = new CapslockFilter(8, 50);
+    final ProxyChatFilter<String> filter = new CapslockFilter(8, 50);
 
     filterHelper.assertNoException(filter, "test");
   }

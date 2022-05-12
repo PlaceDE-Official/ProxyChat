@@ -24,6 +24,7 @@ package uk.co.notnull.ProxyChat.api.placeholder;
 import static org.junit.Assert.assertEquals;
 
 import lombok.Value;
+import net.kyori.adventure.text.Component;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -91,9 +92,9 @@ public class PlaceHolderManagerTest {
   }
 
   @Value
-  private static final class HelperPlaceholder implements ProxyChatPlaceHolder {
-    private final String name;
-    private final String replacement;
+  private static class HelperPlaceholder implements ProxyChatPlaceHolder {
+    String name;
+    String replacement;
 
     @Override
     public boolean isContextApplicable(ProxyChatContext context) {
@@ -101,7 +102,12 @@ public class PlaceHolderManagerTest {
     }
 
     @Override
-    public Component getReplacement(String name, ProxyChatContext context) {
+    public Component getReplacementComponent(String name, ProxyChatContext context) {
+      return Component.text(replacement);
+    }
+
+    @Override
+    public String getReplacement(String name, ProxyChatContext context) {
       return replacement;
     }
   }

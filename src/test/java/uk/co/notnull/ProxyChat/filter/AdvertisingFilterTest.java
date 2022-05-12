@@ -21,24 +21,23 @@
 
 package uk.co.notnull.ProxyChat.filter;
 
-import static org.junit.Assert.assertEquals;
-
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatFilter;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.message.Messages;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class AdvertisingFilterTest {
-  private static final ProxyChatFilter FILTER =
+  private static final ProxyChatFilter<String> FILTER =
       new AdvertisingFilter(Arrays.asList("www.google.com", "*.net"), true);
   private static final FilterHelper filterHelper = new FilterHelper(Messages.ANTI_ADVERTISE);
 
   @Test
   public void consoleTest() {
-    final ProxyChatFilter filter = new AdvertisingFilter(Arrays.asList());
+    final ProxyChatFilter<String> filter = new AdvertisingFilter(Collections.emptyList());
 
     filterHelper.assertNoException(filter, "test");
   }

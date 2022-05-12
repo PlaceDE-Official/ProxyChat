@@ -78,7 +78,7 @@ public class RegexUtilTest {
           RegexUtil.parseWildcardToPattern(
               testString,
               Pattern.CASE_INSENSITIVE,
-              (i & (1 << 0)) > 0,
+              (i & (1)) > 0,
               (i & (1 << 1)) > 0,
               (i & (1 << 2)) > 0,
               (i & (1 << 3)) > 0);

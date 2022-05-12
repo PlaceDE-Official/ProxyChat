@@ -21,17 +21,24 @@
 
 package uk.co.notnull.ProxyChat.api.filter;
 
-//@RequiredArgsConstructor
-//public class FunctionFilter implements ProxyChatFilter {
-//  private final Function<Component, Component> filter;
-//  @Getter private final int priority;
-//
-//  public FunctionFilter(Function<Component, Component> filter) {
-//    this(filter, 0);
-//  }
-//
-//  @Override
-//  public Component applyFilter(ProxyChatAccount sender, Component message) {
-//    return filter.apply(message);
-//  }
-//}
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
+
+import java.util.function.Function;
+
+@RequiredArgsConstructor
+public class FunctionFilter implements ProxyChatPreParseFilter {
+  private final Function<String, String> filter;
+  @Getter
+  private final int priority;
+
+  public FunctionFilter(Function<String, String> filter) {
+    this(filter, 0);
+  }
+
+  @Override
+  public String applyFilter(ProxyChatAccount sender, String message) {
+    return filter.apply(message);
+  }
+}

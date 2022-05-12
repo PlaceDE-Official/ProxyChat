@@ -30,9 +30,8 @@ import java.util.function.Supplier;
 import org.junit.Test;
 
 public class TimeUtilTest {
-  private static double DELTA = 0.0;
 
-  private static void assertCorrectTimeFormat(String timeFormat, Supplier<String> testMethod) {
+	private static void assertCorrectTimeFormat(String timeFormat, Supplier<String> testMethod) {
     SimpleDateFormat sdfDate = new SimpleDateFormat(timeFormat);
     Date now = new Date();
 
@@ -41,46 +40,47 @@ public class TimeUtilTest {
 
   @Test
   public void convertStringTimeToDoubleTest() {
-    assertEquals(
+	  double DELTA = 0.0;
+	  assertEquals(
         "Converting years to milliseconds yielded the wrong result.",
         331128000000.0,
         TimeUtil.convertStringTimeToDouble("10.5y"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting months to milliseconds yielded the wrong result.",
         27216000000.0,
         TimeUtil.convertStringTimeToDouble("10.5mo"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting weeks to milliseconds yielded the wrong result.",
         6350400000.0,
         TimeUtil.convertStringTimeToDouble("10.5w"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting days to milliseconds yielded the wrong result.",
         907200000.0,
         TimeUtil.convertStringTimeToDouble("10.5d"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting hours to milliseconds yielded the wrong result.",
         37800000.0,
         TimeUtil.convertStringTimeToDouble("10.5h"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting minutes to milliseconds yielded the wrong result.",
         630000.0,
         TimeUtil.convertStringTimeToDouble("10.5m"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting seconds to milliseconds yielded the wrong result.",
         10500.0,
         TimeUtil.convertStringTimeToDouble("10.5s"),
-        DELTA);
+		DELTA);
     assertEquals(
         "Converting milliseconds to milliseconds yielded the wrong result.",
         10.5,
         TimeUtil.convertStringTimeToDouble("10.5"),
-        DELTA);
+		DELTA);
   }
 
   @Test(expected = NumberFormatException.class)

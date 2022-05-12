@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import uk.co.notnull.ProxyChat.api.module.ModuleManager;
 
 public class ProxyChatModuleManagerTest {
   @BeforeClass
@@ -36,13 +37,13 @@ public class ProxyChatModuleManagerTest {
 
   @AfterClass
   public static void deinitProxyChat() throws IOException {
-//    TestHelper.deinitProxyChat();
+    TestHelper.deinitProxyChat();
   }
 
   @Test
   public void modulesEnableAndDisableTest() {
-//    ProxyChatModuleManager.registerPluginModules();
-//    ModuleManager.enableModules();
-//    ModuleManager.disableModules();
+    ProxyChatModuleManager.registerPluginModules();
+    ModuleManager.enableModules();
+    ModuleManager.disableModules();
   }
 }

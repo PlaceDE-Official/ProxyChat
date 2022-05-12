@@ -31,7 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DuplicationFilterTest {
-  private static DuplicationFilter FILTER = new DuplicationFilter(2, 1, true);
+  private static final DuplicationFilter FILTER = new DuplicationFilter(2, 1, true);
   private static final FilterHelper filterHelper = new FilterHelper(Messages.ANTI_DUPLICATION);
 
   @Before
@@ -63,7 +63,7 @@ public class DuplicationFilterTest {
 
   @Test
   public void consoleTest() {
-    final ProxyChatFilter filter = new DuplicationFilter(0, 0);
+    final ProxyChatFilter<String> filter = new DuplicationFilter(0, 0);
 
     filterHelper.assertNoException(filter, "test");
   }

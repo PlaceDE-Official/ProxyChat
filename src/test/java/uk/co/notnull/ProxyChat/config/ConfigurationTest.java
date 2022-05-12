@@ -51,7 +51,8 @@ public class ConfigurationTest {
     Config defaultConfig =
         ConfigFactory.parseReader(
             new InputStreamReader(
-                    ProxyChat.getInstance().getResourceAsStream(Configuration.CONFIG_FILE_NAME),
+                    ProxyChat.getInstance().getClass()
+                            .getClassLoader().getResourceAsStream(Configuration.CONFIG_FILE_NAME),
                     StandardCharsets.UTF_8),
             Configuration.PARSE_OPTIONS);
 

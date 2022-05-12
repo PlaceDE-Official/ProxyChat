@@ -21,38 +21,44 @@
 
 package uk.co.notnull.ProxyChat.testhelpers;
 
+import com.velocitypowered.api.proxy.server.RegisteredServer;
+import com.velocitypowered.api.proxy.server.ServerInfo;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.util.LinkedHashMap;
+
+import java.net.InetSocketAddress;
 import java.util.Map;
+
+import org.apache.commons.collections4.map.LinkedMap;
 import org.junit.BeforeClass;
 import org.mockito.Mockito;
+import uk.co.notnull.ProxyChat.ProxyChat;
+import uk.co.notnull.ProxyChat.TestHelper;
+import uk.co.notnull.ProxyChat.velocity.DummyProxyServer;
 
 public abstract class ServerInfoTest {
   @SuppressFBWarnings(
       value = {"MS_PKGPROTECT", "MS_CANNOT_BE_FINAL"},
       justification = "Child classes need access to it.")
-  protected static Map<String, ServerInfo> servers;
+  protected static Map<String, RegisteredServer> servers;
 
   @BeforeClass
   public static void setupProxyServer() {
-    servers = new LinkedHashMap<>(); // LinkedHashMaps keep insertion order
-    final ProxyServer mockProxyServer = Mockito.mock(ProxyServer.class);
+    servers = new LinkedMap<>(); // LinkedHashMaps keep insertion order
+    TestHelper.initProxyChat();
 
     addMockServer("main");
     addMockServer("hub1");
     addMockServer("hub2");
     addMockServer("test");
-
-    Mockito.when(mockProxyServer.getServers()).thenReturn(servers);
-
-    ProxyServer.setInstance(mockProxyServer);
   }
 
   private static void addMockServer(String serverName) {
-    final ServerInfo server = Mockito.mock(ServerInfo.class);
+    final ServerInfo serverInfo = new ServerInfo(serverName, new InetSocketAddress(80));
+    final RegisteredServer registeredServer = Mockito.mock(RegisteredServer.class);
 
-    Mockito.when(server.getName()).thenReturn(serverName);
+    Mockito.when(registeredServer.getServerInfo()).thenReturn(serverInfo);
 
-    servers.put(serverName, server);
+    ((DummyProxyServer) ProxyChat.getInstance().getProxy()).addServer(serverName, registeredServer);
+    servers.put(serverName, registeredServer);
   }
 }

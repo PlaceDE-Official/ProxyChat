@@ -75,6 +75,10 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.11.0'
     testImplementation name: 'MessagesTranslator-1.4.3.41-DEV'
     testImplementation 'com.velocitypowered:velocity-api:3.1.2-SNAPSHOT'
+    testImplementation "org.mockito:mockito-core:3.6.0"
+    testImplementation "org.powermock:powermock-api-mockito2:2.0.9"
+    testImplementation "org.powermock:powermock-module-junit4:2.0.9"
+    testCompileOnly "com.github.spotbugs:spotbugs-annotations:4.2.0"
 
     testCompileOnly 'com.velocitypowered:velocity-api:3.1.2-SNAPSHOT'
 

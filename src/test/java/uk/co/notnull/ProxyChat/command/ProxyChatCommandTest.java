@@ -23,9 +23,12 @@ package uk.co.notnull.ProxyChat.command;
 
 import static org.junit.Assert.assertEquals;
 
+import com.velocitypowered.api.command.SimpleCommand;
 import uk.co.notnull.ProxyChat.testhelpers.AccountManagerTest;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -34,78 +37,52 @@ public class ProxyChatCommandTest extends AccountManagerTest {
       Mockito.mock(ProxyChatCommand.class, Mockito.CALLS_REAL_METHODS);
 
   private static Collection<String> tabComplete(String... args) {
-    return handler.tabComplete(null, args);
+    SimpleCommand.Invocation invocation = Mockito.mock(SimpleCommand.Invocation.class);
+    Mockito.when(invocation.arguments()).thenReturn(args);
+
+    return handler.suggest(invocation);
   }
 
   @Test
   public void tabCompletefirstArgumentTest() {
-    assertEquals(Arrays.asList("modules", "reload", "setprefix", "setsuffix"), tabComplete(""));
-    assertEquals(Arrays.asList("setprefix", "setsuffix"), tabComplete("s"));
-    assertEquals(Arrays.asList("setprefix", "setsuffix"), tabComplete("set"));
-    assertEquals(Arrays.asList("setprefix"), tabComplete("setpr"));
-    assertEquals(Arrays.asList("setprefix"), tabComplete("setprefix"));
-    assertEquals(Arrays.asList("modules"), tabComplete("mod"));
-    assertEquals(Arrays.asList(), tabComplete("xxx"));
+    assertEquals(Arrays.asList("modules", "reload"), tabComplete(""));
+    assertEquals(Collections.singletonList("modules"), tabComplete("mod"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx"));
   }
 
   @Test
   public void tabCompleteSecondArgumentTest() {
-    assertEquals(
-        Arrays.asList("test", "player1", "player2", "hello"), tabComplete("setprefix", ""));
-    assertEquals(Arrays.asList("player1", "player2"), tabComplete("setprefix", "p"));
-    assertEquals(Arrays.asList("player1"), tabComplete("setprefix", "player1"));
-    assertEquals(Arrays.asList("hello"), tabComplete("setprefix", "HeLl"));
-    assertEquals(Arrays.asList("test"), tabComplete("setprefix", "tEsT"));
-    assertEquals(
-        Arrays.asList("test", "player1", "player2", "hello"), tabComplete("setsuffix", ""));
-    assertEquals(Arrays.asList("player1", "player2"), tabComplete("setsuffix", "p"));
-    assertEquals(Arrays.asList("player1"), tabComplete("setsuffix", "player1"));
-    assertEquals(Arrays.asList("hello"), tabComplete("setsuffix", "HeLl"));
-    assertEquals(Arrays.asList("test"), tabComplete("setsuffix", "tEsT"));
-
-    assertEquals(Arrays.asList(), tabComplete("modules", ""));
-    assertEquals(Arrays.asList(), tabComplete("modules", "p"));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("reload", ""));
-    assertEquals(Arrays.asList(), tabComplete("reload", "p"));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", ""));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", ""));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", ""));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1"));
   }
 
   @Test
   public void tabCompleteExtraArgumentsTest() {
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", ""));
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", "p"));
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", ""));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", "p"));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", ""));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", "p"));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", ""));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", "p"));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", ""));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", "p"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", ""));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", ""));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", ""));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", "player1"));
 
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", "xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", "xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("setprefix", "player1", "xxx", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", "xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", "xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("setsuffix", "player1", "xxx", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", "xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", "xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("modules", "player1", "xxx", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", "xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", "xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("reload", "player1", "xxx", "player1"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", "xxx", ""));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", "xxx", "p"));
-    assertEquals(Arrays.asList(), tabComplete("xxx", "player1", "xxx", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", "xxx", ""));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", "xxx", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("modules", "player1", "xxx", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", "xxx", ""));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", "xxx", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("reload", "player1", "xxx", "player1"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", "xxx", ""));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", "xxx", "p"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx", "player1", "xxx", "player1"));
   }
 }

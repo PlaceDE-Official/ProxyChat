@@ -23,9 +23,12 @@ package uk.co.notnull.ProxyChat.command;
 
 import static org.junit.Assert.assertEquals;
 
+import com.velocitypowered.api.command.SimpleCommand;
 import uk.co.notnull.ProxyChat.testhelpers.ServerInfoTest;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -34,24 +37,27 @@ public class LocalToCommandTest extends ServerInfoTest {
       Mockito.mock(LocalToCommand.class, Mockito.CALLS_REAL_METHODS);
 
   private static Collection<String> tabComplete(String... args) {
-    return handler.tabComplete(null, args);
+      SimpleCommand.Invocation invocation = Mockito.mock(SimpleCommand.Invocation.class);
+      Mockito.when(invocation.arguments()).thenReturn(args);
+
+      return handler.suggest(invocation);
   }
 
   @Test
   public void tabCompletefirstArgumentTest() {
     assertEquals(Arrays.asList("main", "hub1", "hub2", "test"), tabComplete(""));
     assertEquals(Arrays.asList("hub1", "hub2"), tabComplete("h"));
-    assertEquals(Arrays.asList("test"), tabComplete("tes"));
-    assertEquals(Arrays.asList("main"), tabComplete("main"));
-    assertEquals(Arrays.asList(), tabComplete("xxx"));
+    assertEquals(Collections.singletonList("test"), tabComplete("tes"));
+    assertEquals(Collections.singletonList("main"), tabComplete("main"));
+    assertEquals(Collections.emptyList(), tabComplete("xxx"));
   }
 
   @Test
   public void tabCompleteExtraArgumentsTest() {
-    assertEquals(Arrays.asList(), tabComplete("main", ""));
-    assertEquals(Arrays.asList(), tabComplete("main", "test"));
+    assertEquals(Collections.emptyList(), tabComplete("main", ""));
+    assertEquals(Collections.emptyList(), tabComplete("main", "test"));
 
-    assertEquals(Arrays.asList(), tabComplete("main", "test", ""));
-    assertEquals(Arrays.asList(), tabComplete("main", "test", "test"));
+    assertEquals(Collections.emptyList(), tabComplete("main", "test", ""));
+    assertEquals(Collections.emptyList(), tabComplete("main", "test", "test"));
   }
 }

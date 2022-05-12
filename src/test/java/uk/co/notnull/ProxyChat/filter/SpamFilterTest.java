@@ -34,7 +34,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SpamFilterTest {
-  private static SpamFilter FILTER = new SpamFilter(3, true);
+  private static final SpamFilter FILTER = new SpamFilter(3, true);
   private static final FilterHelper filterHelper = new FilterHelper(Messages.ANTI_SPAM);
 
   @BeforeClass
@@ -90,7 +90,7 @@ public class SpamFilterTest {
 
   @Test
   public void consoleTest() {
-    final ProxyChatFilter filter = new SpamFilter(3);
+    final ProxyChatFilter<String> filter = new SpamFilter(3);
 
     filterHelper.assertNoException(filter, "test");
   }

@@ -63,18 +63,18 @@ public class FilterManagerTest {
   public void executionTest() {
     final String message = "test";
 
-    ProxyChatFilter filter = new TestFilter(message);
+    ProxyChatPreParseFilter filter = new TestFilter(message);
 
     try {
-      FilterManager.addFilter(message, filter);
+      FilterManager.addPreParseFilter(message, filter);
 
-      FilterManager.applyFilters(null, null);
+      FilterManager.applyFilters(null, message);
 
       fail("Filter has not be called!");
     } catch (BlockMessageException e) {
       assertEquals("Exception message not as expected!", message, e.getMessage());
     } finally {
-      FilterManager.removeFilter(message);
+      FilterManager.removePreParseFilter(message);
     }
   }
 
@@ -85,25 +85,25 @@ public class FilterManagerTest {
     final String message3 = "test300";
     final String message4 = "test400";
 
-    ProxyChatFilter filter1 = new FunctionFilter(in -> in + '1', 100);
-    ProxyChatFilter filter2 = new FunctionFilter(in -> in + '2', 200);
-    ProxyChatFilter filter3 = new FunctionFilter(in -> in + '3', 300);
-    ProxyChatFilter filter4 = new FunctionFilter(in -> in + '4', 400);
+    ProxyChatPreParseFilter filter1 = new FunctionFilter(in -> in + '1', 100);
+    ProxyChatPreParseFilter filter2 = new FunctionFilter(in -> in + '2', 200);
+    ProxyChatPreParseFilter filter3 = new FunctionFilter(in -> in + '3', 300);
+    ProxyChatPreParseFilter filter4 = new FunctionFilter(in -> in + '4', 400);
 
     try {
-      FilterManager.addFilter(message1, filter1);
-      FilterManager.addFilter(message2, filter2);
-      FilterManager.addFilter(message3, filter3);
-      FilterManager.addFilter(message4, filter4);
+      FilterManager.addPreParseFilter(message1, filter1);
+      FilterManager.addPreParseFilter(message2, filter2);
+      FilterManager.addPreParseFilter(message3, filter3);
+      FilterManager.addPreParseFilter(message4, filter4);
 
       String ret = FilterManager.applyFilters(null, "Test_");
 
       assertEquals("Result message not as expected!", "Test_4321", ret);
     } finally {
-      FilterManager.removeFilter(message1);
-      FilterManager.removeFilter(message2);
-      FilterManager.removeFilter(message3);
-      FilterManager.removeFilter(message4);
+      FilterManager.removePreParseFilter(message1);
+      FilterManager.removePreParseFilter(message2);
+      FilterManager.removePreParseFilter(message3);
+      FilterManager.removePreParseFilter(message4);
     }
   }
 
@@ -114,33 +114,33 @@ public class FilterManagerTest {
     final String message3 = "test300";
     final String message4 = "test400";
 
-    ProxyChatFilter filter1 = new TestFilter(message1, 100);
-    ProxyChatFilter filter2 = new TestFilter(message2, 200);
-    ProxyChatFilter filter3 = new TestFilter(message3, 300);
-    ProxyChatFilter filter4 = new TestFilter(message4, 400);
+    ProxyChatPreParseFilter filter1 = new TestFilter(message1, 100);
+    ProxyChatPreParseFilter filter2 = new TestFilter(message2, 200);
+    ProxyChatPreParseFilter filter3 = new TestFilter(message3, 300);
+    ProxyChatPreParseFilter filter4 = new TestFilter(message4, 400);
 
     try {
-      FilterManager.addFilter(message1, filter1);
-      FilterManager.addFilter(message2, filter2);
-      FilterManager.addFilter(message3, filter3);
-      FilterManager.addFilter(message4, filter4);
+      FilterManager.addPreParseFilter(message1, filter1);
+      FilterManager.addPreParseFilter(message2, filter2);
+      FilterManager.addPreParseFilter(message3, filter3);
+      FilterManager.addPreParseFilter(message4, filter4);
 
-      FilterManager.applyFilters(null, null);
+      FilterManager.applyFilters(null, (String) null);
 
       fail("Filter has not be called!");
     } catch (BlockMessageException e) {
       assertEquals("Exception message not as expected!", message4, e.getMessage());
     } finally {
-      FilterManager.removeFilter(message1);
-      FilterManager.removeFilter(message2);
-      FilterManager.removeFilter(message3);
-      FilterManager.removeFilter(message4);
+      FilterManager.removePreParseFilter(message1);
+      FilterManager.removePreParseFilter(message2);
+      FilterManager.removePreParseFilter(message3);
+      FilterManager.removePreParseFilter(message4);
     }
   }
 
   @RequiredArgsConstructor
   @Getter
-  private static class TestFilter implements ProxyChatFilter {
+  private static class TestFilter implements ProxyChatPreParseFilter {
     private final String message;
     private final int priority;
 

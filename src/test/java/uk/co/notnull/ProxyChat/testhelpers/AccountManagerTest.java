@@ -21,6 +21,7 @@
 
 package uk.co.notnull.ProxyChat.testhelpers;
 
+import com.velocitypowered.api.command.CommandSource;
 import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.enums.AccountType;
@@ -30,10 +31,11 @@ import org.junit.BeforeClass;
 import org.mockito.Mockito;
 
 public abstract class AccountManagerTest {
-  protected static final CommandSender console = Mockito.mock(CommandSender.class);
+  protected static final CommandSource console = Mockito.mock(CommandSource.class);
 
   @BeforeClass
   public static void setupAccounts() {
+    HelperAccountManager.clearPlayers();
     HelperAccountManager.addPlayer("test");
     HelperAccountManager.addPlayer("player1");
     HelperAccountManager.addPlayer("player2");
@@ -55,6 +57,11 @@ public abstract class AccountManagerTest {
       Mockito.when(account.getAccountType()).thenReturn(AccountType.PLAYER);
 
       accounts.put(uuid, account);
+    }
+
+    public static void clearPlayers() {
+      accounts.clear();
+      id = 0;
     }
   }
 }

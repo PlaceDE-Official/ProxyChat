@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class FilterHelper {
   private final Messages expectedMessage;
 
-  public void assertException(ProxyChatFilter filter, String text) {
+  public void assertException(ProxyChatFilter<String> filter, String text) {
     try {
       filter.applyFilter(AccountManager.getConsoleAccount(), text);
 
@@ -46,7 +46,7 @@ public class FilterHelper {
     }
   }
 
-  public void assertNoException(ProxyChatFilter filter, String text) {
+  public void assertNoException(ProxyChatFilter<String> filter, String text) {
     try {
       String result = filter.applyFilter(AccountManager.getConsoleAccount(), text);
 

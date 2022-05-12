@@ -34,8 +34,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'ch.vorburger.mariaDB4j:mariaDB4j:2.5.3'
     testImplementation 'commons-io:commons-io:2.11.0'
-
-    testCompileOnly 'com.velocitypowered:velocity-api:3.1.2-SNAPSHOT'
+    testImplementation 'com.velocitypowered:velocity-api:3.1.2-SNAPSHOT'
 
     testRuntimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 }

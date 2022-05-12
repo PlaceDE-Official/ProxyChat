@@ -19,30 +19,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package uk.co.notnull.ProxyChat;
+package uk.co.notnull.ProxyChat.velocity;
 
-import static org.junit.Assert.assertTrue;
+import com.velocitypowered.api.event.EventHandler;
+import com.velocitypowered.api.event.EventManager;
+import com.velocitypowered.api.event.PostOrder;
 
-import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+public class DummyEventManager implements EventManager {
+	@Override
+	public void register(Object o, Object o1) {
 
-public class ProxyChatTest {
-
-	@BeforeClass
-	public static void initProxyChat() {
-		TestHelper.initProxyChat();
 	}
 
-	@AfterClass
-	public static void deinitProxyChat() throws IOException {
-		TestHelper.deinitProxyChat();
+	@Override
+	public <E> void register(Object o, Class<E> aClass, PostOrder postOrder, EventHandler<E> eventHandler) {
+
 	}
 
-	@Test
-	public void a() {
-		assertTrue(true);
+	@Override
+	public <E> CompletableFuture<E> fire(E e) {
+		return CompletableFuture.completedFuture(e);
+	}
+
+	@Override
+	public void unregisterListeners(Object o) {
+
+	}
+
+	@Override
+	public void unregisterListener(Object o, Object o1) {
+
+	}
+
+	@Override
+	public <E> void unregister(Object o, EventHandler<E> eventHandler) {
+
 	}
 }
