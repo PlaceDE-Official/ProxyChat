@@ -21,6 +21,7 @@
 
 package uk.co.notnull.ProxyChat.filter;
 
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.filter.BlockMessageException;
 import uk.co.notnull.ProxyChat.message.Messages;
@@ -33,7 +34,7 @@ public class ExtendedBlockMessageException extends BlockMessageException {
 
   public ExtendedBlockMessageException(
       Messages messageType, ProxyChatAccount sender) {
-    super(messageType.get(sender));
+    super(PlainTextComponentSerializer.plainText().serialize(messageType.get(sender)));
 
     this.messageType = messageType;
   }

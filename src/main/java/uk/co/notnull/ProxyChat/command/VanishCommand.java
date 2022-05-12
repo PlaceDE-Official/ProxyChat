@@ -80,7 +80,7 @@ public class VanishCommand extends BaseCommand {
       return arg1Completetions;
     }
 
-    if (invocation.arguments().length == 1 && !arg1Completetions.contains(invocation.arguments()[0])) {
+    if (invocation.arguments().length == 1) {
       final String param1 = invocation.arguments()[0];
 
       return arg1Completetions.stream()

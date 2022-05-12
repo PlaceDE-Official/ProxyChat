@@ -62,8 +62,6 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
   private final String tableAccountsColumnSocialSpy;
   private final String tableAccountsColumnLocalSpy;
   private final String tableAccountsColumnMutedUntil;
-  private final String tableAccountsColumnStoredPrefix;
-  private final String tableAccountsColumnStoredSuffix;
   private final String tableIgnores;
   private final String tableIgnoresColumnUser;
   private final String tableIgnoresColumnIgnores;
@@ -140,8 +138,6 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
     tableAccountsColumnSocialSpy = "SocialSpy";
     tableAccountsColumnLocalSpy = "LocalSpy";
     tableAccountsColumnMutedUntil = "MutedUntil";
-    tableAccountsColumnStoredPrefix = "StoredPrefix";
-    tableAccountsColumnStoredSuffix = "StoredSuffix";
     tableIgnores = getTableName("Ignores");
     tableIgnoresColumnUser = "User";
     tableIgnoresColumnIgnores = "Ignores";
@@ -161,6 +157,7 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
     prepareStatements();
   }
 
+  @SneakyThrows
   @Override
   public void save(ProxyChatAccount account) {
     try {
@@ -200,6 +197,7 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
     }
   }
 
+  @SneakyThrows
   @Override
   public AccountInfo load(UUID uuid) {
     try {
@@ -325,11 +323,7 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
               + tableAccountsColumnLocalSpy
               + " BOOLEAN NOT NULL, "
               + tableAccountsColumnMutedUntil
-              + " DATETIME NOT NULL, "
-              + tableAccountsColumnStoredPrefix
-              + " TEXT, "
-              + tableAccountsColumnStoredSuffix
-              + " TEXT, PRIMARY KEY ("
+              + " DATETIME NOT NULL, PRIMARY KEY ("
               + tableAccountsColumnUUID
               + ")) DEFAULT CHARSET=utf8";
       final String createIgnoresTable =
@@ -389,11 +383,7 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
               + tableAccountsColumnLocalSpy
               + ", "
               + tableAccountsColumnMutedUntil
-              + ", "
-              + tableAccountsColumnStoredPrefix
-              + ", "
-              + tableAccountsColumnStoredSuffix
-              + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE "
+              + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE "
               + tableAccountsColumnUserName
               + " = VALUES("
               + tableAccountsColumnUserName
@@ -421,14 +411,6 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
               + tableAccountsColumnMutedUntil
               + " = VALUES("
               + tableAccountsColumnMutedUntil
-              + "), "
-              + tableAccountsColumnStoredPrefix
-              + " = VALUES("
-              + tableAccountsColumnStoredPrefix
-              + "), "
-              + tableAccountsColumnStoredSuffix
-              + " = VALUES("
-              + tableAccountsColumnStoredSuffix
               + ")";
       final String loadAccountStr =
           "SELECT "
@@ -443,10 +425,6 @@ public class AccountSQLStorage implements ProxyChatAccountStorage {
               + tableAccountsColumnLocalSpy
               + ", "
               + tableAccountsColumnMutedUntil
-              + ", "
-              + tableAccountsColumnStoredPrefix
-              + ", "
-              + tableAccountsColumnStoredSuffix
               + " FROM "
               + tableAccounts
               + " WHERE "

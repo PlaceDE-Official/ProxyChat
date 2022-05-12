@@ -53,6 +53,10 @@ public class EmoteFilter implements ProxyChatPreParseFilter {
 			return module.getEmoteByName(match).map(emote -> ":" + emote.getPrimaryName() + ":").orElse(matcher.group());
 		});
 
+		if(module.getCharacterPattern() == null) {
+			return message;
+		}
+
 		return module.getCharacterPattern().matcher(message)
 				.replaceAll(matcher -> module.getEmoteByCharacter(matcher.group())
 						.map(emote -> ":" + emote.getPrimaryName() + ":")

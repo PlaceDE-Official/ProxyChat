@@ -238,7 +238,7 @@ public class PlaceHolders {
     PlaceHolderManager.registerPlaceholder(
         new PlaceHolder(
                 "message",
-                context -> context.getFilteredMessage().orElse(context.getMessage().get()),
+                context -> PlaceHolderUtil.escapePlaceholders(context.getFilteredMessage().orElse(context.getMessage().get())),
                 (ComponentReplacementSupplier) context -> context.getParsedMessage().get(),
                 ProxyChatContext.HAS_MESSAGE)
             .createAliases("command", "unknown_server"));

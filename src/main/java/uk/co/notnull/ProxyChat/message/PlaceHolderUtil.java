@@ -49,6 +49,9 @@ public class PlaceHolderUtil {
   private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
           .character('&').extractUrls().hexColors().hexCharacter('x').useUnusualXRepeatedCharacterHexFormat().build();
 
+  private static final char placeholderChar = PlaceHolderManager.placeholderChar;
+  private static final String placeholderString = String.valueOf(placeholderChar);
+
   private static final ImmutableMap<TextFormat, Permission> permissionMap =
       ImmutableMap.<TextFormat, Permission>builder()
           .put(NamedTextColor.BLACK, Permission.USE_CHAT_COLOR_BLACK)
@@ -221,5 +224,9 @@ public class PlaceHolderUtil {
     }
 
     return message;
+  }
+
+  public static String escapePlaceholders(String message) {
+    return message.replace(placeholderString, placeholderString + placeholderString);
   }
 }

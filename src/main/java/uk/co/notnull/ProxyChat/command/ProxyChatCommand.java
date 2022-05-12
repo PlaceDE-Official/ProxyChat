@@ -88,10 +88,6 @@ public class ProxyChatCommand extends BaseCommand {
       return arg1Completetions.stream()
           .filter(completion -> completion.startsWith(param1))
           .collect(Collectors.toList());
-    } else if ((invocation.arguments().length == 2) && ("setprefix".equals(param1) || "setsuffix".equals(param1))) {
-      return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[1], invocation.source()).stream()
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
     }
 
     return super.suggest(invocation);

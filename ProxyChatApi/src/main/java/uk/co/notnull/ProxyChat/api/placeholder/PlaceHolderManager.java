@@ -38,7 +38,7 @@ import net.kyori.adventure.text.TextComponent;
 
 @UtilityClass
 public class PlaceHolderManager {
-  private static final Character placeholderChar = '%';
+  public static final Character placeholderChar = '%';
   private static final Pattern placeholderPattern = Pattern.compile(placeholderChar + "\\w+?" + placeholderChar);
   private static final List<ProxyChatPlaceHolder> placeholders = new LinkedList<>();
 

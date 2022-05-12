@@ -37,7 +37,7 @@ public class BlockMessageException extends Exception {
    *
    * @param message The warning displayed to the user.
    */
-  public BlockMessageException(Component message) {
-    super(PlainTextComponentSerializer.plainText().serialize(message));
+  public BlockMessageException(String message) {
+      super(message);
   }
 }

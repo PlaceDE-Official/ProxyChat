@@ -104,7 +104,7 @@ public class ClearChatCommand extends BaseCommand {
 
     final String location = invocation.arguments()[0];
 
-    if (invocation.arguments().length == 1 && !arg1Completetions.contains(location)) {
+    if (invocation.arguments().length == 1) {
       return arg1Completetions.stream()
           .filter(completion -> completion.startsWith(location))
           .collect(Collectors.toList());

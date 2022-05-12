@@ -113,7 +113,9 @@ public class EmoteModule extends Module {
 
 		characterRegex.append("]");
 
-		characterPattern = Pattern.compile(characterRegex.toString());
+		if(characterRegex.length() > 2) {
+			characterPattern = Pattern.compile(characterRegex.toString());
+		}
 	}
 
 	public List<String> getEmoteSuggestions(SimpleCommand.Invocation invocation) {
