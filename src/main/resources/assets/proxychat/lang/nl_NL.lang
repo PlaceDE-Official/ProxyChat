@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,99 +28,99 @@ inherit: en_US
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&eJe praat nu in de &bglobale chat&e!"
-enableStaffchat: "&eJe praat nu in de &astaffchat&e!"
-enableLocal: "&eJe praat nu in de &clokale chat&e!"
-globalIsDefault: "&eGlobale chat is al de standaard chatsoort!"
-localIsDefault: "&eLokale chat is al de standaard chatsoort!"
-backToDefault: "&cHet onderdeel verbonden aan het kanaal waarin je sprak is nu uitgeschakeld of je hebt geen bevoegdheden meer. Je praat nu in de lokale chat."
-notInGlobalServer: "&cGlobale Chat staat niet aan op deze server..."
-notInLocalServer: "&cLokale Chat staat niet aan op deze server..."
+enableGlobal: "<yellow>Je praat nu in de <aqua>globale chat<yellow>!"
+enableStaffchat: "<yellow>Je praat nu in de <green>staffchat<yellow>!"
+enableLocal: "<yellow>Je praat nu in de <red>lokale chat<yellow>!"
+globalIsDefault: "<yellow>Globale chat is al de standaard chatsoort!"
+localIsDefault: "<yellow>Lokale chat is al de standaard chatsoort!"
+backToDefault: "<red>Het onderdeel verbonden aan het kanaal waarin je sprak is nu uitgeschakeld of je hebt geen bevoegdheden meer. Je praat nu in de lokale chat."
+notInGlobalServer: "<red>Globale Chat staat niet aan op deze server..."
+notInLocalServer: "<red>Lokale Chat staat niet aan op deze server..."
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&cJe kunt geen priv?-bericht naar jezelf sturen..."
-enableMessager: "&eJe hebt priv?-berichten nu &aaingeschakeld&e!"
-enableMessagerOthers: "&eJe hebt privéberichten van %name% nu &aaingeschakeld&e!"
-disableMessager: "&eJe hebt priv?-berichten nu &cuitgeschakeld&e!"
-disableMessagerOthers: "&eJe hebt privéberichten van %name% nu &cuitgeschakeld&e!"
-noReply: "&cEr is niemand om te beantwoorden."
-replyOffline: "&cDe speler waarmee je in gesprek was is nu offline."
-hasMessagerDisabled: "&c%name% heeft priv?-berichten uitgeschakeld!"
+messageYourself: "<red>Je kunt geen priv?-bericht naar jezelf sturen..."
+enableMessager: "<yellow>Je hebt priv?-berichten nu <green>aingeschakeld<yellow>!"
+enableMessagerOthers: "<yellow>Je hebt privéberichten van %name% nu <green>aingeschakeld<yellow>!"
+disableMessager: "<yellow>Je hebt priv?-berichten nu <red>uitgeschakeld<yellow>!"
+disableMessagerOthers: "<yellow>Je hebt privéberichten van %name% nu <red>uitgeschakeld<yellow>!"
+noReply: "<red>Er is niemand om te beantwoorden."
+replyOffline: "<red>De speler waarmee je in gesprek was is nu offline."
+hasMessagerDisabled: "<red>%name% heeft priv?-berichten uitgeschakeld!"
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&eJe hebt verbergmodus &aingeschakeld&e!"
-disableVanish: "&eJe hebt verbergmodus &cuitgeschakeld&e!"
+enableVanish: "<yellow>Je hebt verbergmodus <green>ingeschakeld<yellow>!"
+disableVanish: "<yellow>Je hebt verbergmodus <red>uitgeschakeld<yellow>!"
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% heeft de chat lokaal leeggemaakt."
-clearedGlobal: "&e%name% heeft de chat globaal leeggemaakt."
+clearedLocal: "<yellow>%name% heeft de chat lokaal leeggemaakt."
+clearedGlobal: "<yellow>%name% heeft de chat globaal leeggemaakt."
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&cDeze speler is niet gedempt!"
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>Deze speler is niet gedempt!"
 muteIsMuted: "Deze speler is al gedempt!"
-unmute: "&eDe speler &c%name% &ekan weer praten!"
-mute: "&eDe speler &c%name% &eis nu gedempt!"
-tempmute: "&eDe speler &c%name% &eis gedempt tot %muted_until%"
+unmute: "<yellow>De speler <red>%name% <yellow>kan weer praten!"
+mute: "<yellow>De speler <red>%name% <yellow>is nu gedempt!"
+tempmute: "<yellow>De speler <red>%name% <yellow>is gedempt tot %muted_until%"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&eSocialSpy staat nu &aaan&e!"
-disableSocialSpy: "&eSocialSpy staat nu &cuit&e!"
-enableLocalSpy: "&eLocalSpy staat nu &aaan&e!"
-disableLocalSpy: "&eLocalSpy staat nu &cuit&e!"
+enableSocialSpy: "<yellow>SocialSpy staat nu <green>aan<yellow>!"
+disableSocialSpy: "<yellow>SocialSpy staat nu <red>uit<yellow>!"
+enableLocalSpy: "<yellow>LocalSpy staat nu <green>aan<yellow>!"
+disableLocalSpy: "<yellow>LocalSpy staat nu <red>uit<yellow>!"
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&cJe moet een speler zijn om dit te kunnen doen!"
-playerNotFound: "&cKan speler niet vinden..."
-incorrectUsage: "&cOnjuist gebruik! Gebruik het commando op deze manier: %command%"
-noPermission: "&cJe bent niet bevoegd om dit te doen!"
-messageBlank: "&cHet bericht kan niet leeg zijn!"
-unknownServer: "&cOnbekende Server \"&b%unknown_server%&c\""
+notPlayer: "<red>Je moet een speler zijn om dit te kunnen doen!"
+playerNotFound: "<red>Kan speler niet vinden..."
+incorrectUsage: "<red>Onjuist gebruik! Gebruik het commando op deze manier: %command%"
+noPermission: "<red>Je bent niet bevoegd om dit te doen!"
+messageBlank: "<red>Het bericht kan niet leeg zijn!"
+unknownServer: "<red>Onbekende Server \"<aqua>%unknown_server%<red>\""
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% negeert jou..."
-addIgnore: "&eJe negeert nu %name%!"
-removeIgnore: "&eJe negeert %name% nu niet meer!"
-alreadyIgnored: "&eJe negeert deze speler al!"
-ignoreYourself: "&cJe kunt jezelf niet negeren!"
-unignoreYourself: "&cJe kunt jezelf niet on-negeren!"
-notIgnored: "&cJe negeert deze speler niet!"
-ignoreList: "&eOnline gebruikers die jij negeert: &b%message%&e."
-ignoreNobody: "&eJe negeert nu &aniemand&e die online is!"
+hasIgnored: "<red>%target_name% negeert jou..."
+addIgnore: "<yellow>Je negeert nu %name%!"
+removeIgnore: "<yellow>Je negeert %name% nu niet meer!"
+alreadyIgnored: "<yellow>Je negeert deze speler al!"
+ignoreYourself: "<red>Je kunt jezelf niet negeren!"
+unignoreYourself: "<red>Je kunt jezelf niet on-negeren!"
+notIgnored: "<red>Je negeert deze speler niet!"
+ignoreList: "<yellow>Online gebruikers die jij negeert: <aqua>%message%<yellow>."
+ignoreNobody: "<yellow>Je negeert nu <green>niemand<yellow> die online is!"
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&cAdverteer alsjeblieft niet!"
-antiCapslock: "&cGebruik alsjeblieft geen CAPSLOCK!"
-antiDuplication: "&cDupliceer alsjeblieft geen berichten!"
-antiSpam: "&cStuur alsjeblieft berichten niet zo snel!"
+antiAdvertise: "<red>Adverteer alsjeblieft niet!"
+antiCapslock: "<red>Gebruik alsjeblieft geen CAPSLOCK!"
+antiDuplication: "<red>Dupliceer alsjeblieft geen berichten!"
+antiSpam: "<red>Stuur alsjeblieft berichten niet zo snel!"
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&eDe chat is nu op slot!"
-disableChatlock: "&eDe chat is nu niet meer op slot!"
-chatIsLocked: "&cJe kunt niet praten nu, de chat is op slot!"
+enableChatlock: "<yellow>De chat is nu op slot!"
+disableChatlock: "<yellow>De chat is nu niet meer op slot!"
+chatIsLocked: "<red>Je kunt niet praten nu, de chat is op slot!"
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<blue>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"

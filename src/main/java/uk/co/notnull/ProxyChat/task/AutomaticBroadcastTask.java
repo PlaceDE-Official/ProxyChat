@@ -48,7 +48,7 @@ public class AutomaticBroadcastTask implements Runnable {
     this.messages = new ArrayList<>();
 
     messages.forEach(message -> this.messages.add(
-            ComponentUtil.extractUrls(ComponentUtil.legacySerializer.deserialize(message))));
+            ComponentUtil.extractUrls(ComponentUtil.miniMessage.deserialize(message))));
 
     size = this.messages.size();
     this.random = random;

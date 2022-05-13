@@ -23,17 +23,10 @@ package uk.co.notnull.ProxyChat.config;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Files;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigException;
-import com.typesafe.config.ConfigFactory;
-import com.typesafe.config.ConfigObject;
-import com.typesafe.config.ConfigParseOptions;
-import com.typesafe.config.ConfigRenderOptions;
-import com.typesafe.config.ConfigSyntax;
-import com.typesafe.config.ConfigValue;
-import com.typesafe.config.ConfigValueFactory;
+import com.typesafe.config.*;
 import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.api.ProxyChatApi;
+import uk.co.notnull.ProxyChat.util.ComponentUtil;
 import uk.co.notnull.ProxyChat.util.LoggerHelper;
 import java.io.BufferedReader;
 import java.io.File;
@@ -308,6 +301,54 @@ public class Configuration implements Config {
           config = config.withoutPath("Modules.Emotes.prefix").withoutPath("Modules.Emotes.emoteNames")
                   .withValue("Modules.Emotes.emotes.General", ConfigValueFactory.fromAnyRef(emotes));
         }
+
+      case "11.8":
+        List<String> formats = List.of(
+                "alert", "chatLoggingConsole", "chatLoggingFile",
+                "globalChat", "joinMessage", "leaveMessage",
+                "localChat", "localSpy", "messageSender",
+                "messageTarget", "motd", "serverSwitch",
+                "socialSpy", "staffChat", "welcomeMessage");
+
+        //Convert formats from legacy to minimessage syntax
+        for (String format : formats) {
+          String newFormat = ComponentUtil.miniMessage.serialize(
+                  ComponentUtil.legacySerializer.deserialize(config.getString("Formats." + format)));
+
+          config = config.withValue("Formats." + format, ConfigValueFactory.fromAnyRef(newFormat));
+        }
+
+        broadcasts = new ArrayList<>();
+        ConfigList existingBroadcasts = config.getList("Modules.AutoBroadcast.broadcasts");
+
+        //Convert autobroadcast messages from legacy to minimessage syntax
+        for (ConfigValue broadcast : existingBroadcasts) {
+          if(!(broadcast instanceof ConfigObject)) {
+            LoggerHelper.warning("Skipping invalid autobroadcast config");
+            continue;
+          }
+
+          Map<String, Object> value = ((ConfigObject) broadcast).unwrapped();
+
+          if(!(value.get("messages") instanceof List)) {
+            LoggerHelper.warning("Skipping invalid autobroadcast config");
+            return;
+          }
+
+          value.put("messages", ((List<String>) value.get("messages")).stream()
+                  .map(message -> ComponentUtil.miniMessage.serialize(
+                          ComponentUtil.legacySerializer.deserialize(message)))
+                  .collect(Collectors.toList()));
+
+          broadcasts.add(ConfigValueFactory.fromAnyRef(value));
+        }
+
+        // Convert autobroadcast settings to a list
+        config =
+            config
+                .withoutPath("Modules.AutoBroadcast.broadcasts")
+                .withValue("Modules.AutoBroadcast.broadcasts", ConfigValueFactory.fromIterable(broadcasts));
+
       default:
         // Unknow Version or old version
         // -> Update version
@@ -315,7 +356,7 @@ public class Configuration implements Config {
             config.withValue(
                 "Version", ConfigValueFactory.fromAnyRef(ProxyChatApi.CONFIG_VERSION));
 
-      case "11.8":
+      case "11.9":
         // Up to date
         // -> No action needed
     }

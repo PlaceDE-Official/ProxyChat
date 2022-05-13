@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,95 +28,95 @@ inherit: en_US
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&eMost a &bglobális chatet&e használod!"
-enableStaffchat: "&eMost a &astaff chatet&e használod!"
-enableLocal: "&eMost a &chelyi chatet&e használod!"
-globalIsDefault: "&eA globális chat már alapértelmezett!"
-localIsDefault: "&eA helyi chat már alapértelmezett!"
-backToDefault: "&cA használt chat csatorna vagy megszűnt vagy jogaid elvették. Átálltál helyi chatre"
-notInGlobalServer: "&cA globális chat ki van kapcsolva a szerveren..."
-notInLocalServer: "&cA helyi chat ki van kapcsolva a szerveren..."
+enableGlobal: "<yellow>Most a <aqua>globális chatet<yellow> használod!"
+enableStaffchat: "<yellow>Most a <green>staff chatet<yellow> használod!"
+enableLocal: "<yellow>Most a <red>helyi chatet<yellow> használod!"
+globalIsDefault: "<yellow>A globális chat már alapértelmezett!"
+localIsDefault: "<yellow>A helyi chat már alapértelmezett!"
+backToDefault: "<red>A használt chat csatorna vagy megszűnt vagy jogaid elvették. Átálltál helyi chatre"
+notInGlobalServer: "<red>A globális chat ki van kapcsolva a szerveren..."
+notInLocalServer: "<red>A helyi chat ki van kapcsolva a szerveren..."
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&cNem üzenhetsz magadnak..."
-enableMessager: "&aBekapcsoltad&e a privát üzeneteket!"
-disableMessager: "&cKikapcsoltad&e a privát üzeneteket!"
-noReply: "&cNincs akinek válaszolj."
-replyOffline: "&cA játékos akivel beszéltél már elment."
-hasMessagerDisabled: "&c%name% kikapcsolta a privát üzeneteit!"
+messageYourself: "<red>Nem üzenhetsz magadnak..."
+enableMessager: "<green>Bekapcsoltad<yellow> a privát üzeneteket!"
+disableMessager: "<red>Kikapcsoltad<yellow> a privát üzeneteket!"
+noReply: "<red>Nincs akinek válaszolj."
+replyOffline: "<red>A játékos akivel beszéltél már elment."
+hasMessagerDisabled: "<red>%name% kikapcsolta a privát üzeneteit!"
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&aBekapcsoltad&e a rejtett módot!"
-disableVanish: "&cKikapcsoltad&e a rejtett módot!!"
+enableVanish: "<green>Bekapcsoltad<yellow> a rejtett módot!"
+disableVanish: "<red>Kikapcsoltad<yellow> a rejtett módot!!"
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% törölte a helyi chat előzményeit."
-clearedGlobal: "&e%name% törölte a globális chat előzményeit."
+clearedLocal: "<yellow>%name% törölte a helyi chat előzményeit."
+clearedGlobal: "<yellow>%name% törölte a globális chat előzményeit."
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&cA játékos nincs némítva!"
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>A játékos nincs némítva!"
 muteIsMuted: "A játékos már némítva van!"
-unmute: "&c%name% &eújra beszélhet!"
-mute: "&c%name% &enémítva lett!"
-tempmute: "&c%name% &enémítva lett eddig -> %muted_until%"
+unmute: "<red>%name% <yellow>újra beszélhet!"
+mute: "<red>%name% <yellow>némítva lett!"
+tempmute: "<red>%name% <yellow>némítva lett eddig -> %muted_until%"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&ePrivát üzenetek láthatósága &abekapcsolva&e!"
-disableSocialSpy: "&ePrivát üzenetek láthatósága &ckikapcsolva&e!"
-enableLocalSpy: "&eHelyi chatek láthatósága &abekapcsolva&e!"
-disableLocalSpy: "&eHelyi chatek láthatósága &ckikapcsolva&e!"
+enableSocialSpy: "<yellow>Privát üzenetek láthatósága <green>bekapcsolva<yellow>!"
+disableSocialSpy: "<yellow>Privát üzenetek láthatósága <red>kikapcsolva<yellow>!"
+enableLocalSpy: "<yellow>Helyi chatek láthatósága <green>bekapcsolva<yellow>!"
+disableLocalSpy: "<yellow>Helyi chatek láthatósága <red>kikapcsolva<yellow>!"
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&cEzt a parancsot csak játékosok használhatják!"
-playerNotFound: "&cNem található játékos..."
-incorrectUsage: "&cHelytelen használat! Helyes fomátum: %command%"
-noPermission: "&cNincs jogod ehhez a parancshoz!"
-messageBlank: "&cNem küldhetsz üres üzenetet!"
-unknownServer: "&cIsmeretlen szerver \"&b%unknown_server%&c\""
+notPlayer: "<red>Ezt a parancsot csak játékosok használhatják!"
+playerNotFound: "<red>Nem található játékos..."
+incorrectUsage: "<red>Helytelen használat! Helyes fomátum: %command%"
+noPermission: "<red>Nincs jogod ehhez a parancshoz!"
+messageBlank: "<red>Nem küldhetsz üres üzenetet!"
+unknownServer: "<red>Ismeretlen szerver \"<aqua>%unknown_server%<red>\""
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% nem látja az üzeneteid..."
-addIgnore: "&eMostantól nem látod %name% üzeneteit!"
-removeIgnore: "&eÚjra látod %name% üzeneteit!"
-alreadyIgnored: "&eEnnek a játékosnak már nem látod az üzeneteit!"
-ignoreYourself: "&cA saját üzenetek láthatósága nem kapcsolható!"
-unignoreYourself: "&cA saját üzenetek láthatósága nem kapcsolható!"
-notIgnored: "&cEnnek a játékosnak látod az üzeneteit!"
-ignoreList: "&eÜzenetek kikapcsolva: &b%message%&e."
-ignoreNobody: "&aMinden online játékos üzeneteit látod!"
+hasIgnored: "<red>%target_name% nem látja az üzeneteid..."
+addIgnore: "<yellow>Mostantól nem látod %name% üzeneteit!"
+removeIgnore: "<yellow>Újra látod %name% üzeneteit!"
+alreadyIgnored: "<yellow>Ennek a játékosnak már nem látod az üzeneteit!"
+ignoreYourself: "<red>A saját üzenetek láthatósága nem kapcsolható!"
+unignoreYourself: "<red>A saját üzenetek láthatósága nem kapcsolható!"
+notIgnored: "<red>Ennek a játékosnak látod az üzeneteit!"
+ignoreList: "<yellow>Üzenetek kikapcsolva: <aqua>%message%<yellow>."
+ignoreNobody: "<green>Minden online játékos üzeneteit látod!"
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&cKérlek ne reklámozz!"
-antiDuplication: "&cKérlek ne szemeteld a chatet!"
+antiAdvertise: "<red>Kérlek ne reklámozz!"
+antiDuplication: "<red>Kérlek ne szemeteld a chatet!"
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&eBeszélgetés kikapcsolva!"
-disableChatlock: "&eBeszélgetés újra engedélyezve!"
-chatIsLocked: "&cA beszélgetés le van tiltva, most nem szólalhatsz meg!"
+enableChatlock: "<yellow>Beszélgetés kikapcsolva!"
+disableChatlock: "<yellow>Beszélgetés újra engedélyezve!"
+chatIsLocked: "<red>A beszélgetés le van tiltva, most nem szólalhatsz meg!"
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<gray>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"

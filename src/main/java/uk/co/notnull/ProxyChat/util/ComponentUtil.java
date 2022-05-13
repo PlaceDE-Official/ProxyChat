@@ -63,6 +63,8 @@ public class ComponentUtil {
 	public static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
 				  .character('&').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 
+	public static final MiniMessage miniMessage = MiniMessage.miniMessage();
+
 	static final Pattern URL_SCHEME_PATTERN = Pattern.compile("^[a-z][a-z\\d+\\-.]*:");
 
 	static final Style urlStyle = Style.style().color(TextColor.fromHexString("#8194e4"))

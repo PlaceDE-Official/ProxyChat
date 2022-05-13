@@ -62,7 +62,7 @@ public interface ProxyChatApi {
         "povsister"
       };
   String[] DONATORS = new String[] {"Breantique", "NickT"};
-  double CONFIG_VERSION = 11.8;
+  double CONFIG_VERSION = 11.9;
 
   /**
    * Method to retrieve the instance of the API

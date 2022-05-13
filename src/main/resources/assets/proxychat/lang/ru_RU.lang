@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,95 +28,95 @@ inherit: ru_RU
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&eТеперь вы говорите в &bглобальном чате&e."
-enableStaffchat: "&eТеперь вы говорите в &aчате для персонала&e."
-enableLocal: "&eТеперь вы говорите в &cлокальном чате&e."
-globalIsDefault: "&eГлобальный чат уже установлен как стандартный чат."
-localIsDefault: "&eЛокальный чат уже установлен как стандартный чат."
-backToDefault: "&cФункция, связанная с данным чатом, была отключена или ваши права на этот чат были отозваны. Теперь вы говорите в чате, установленном по умолчанию."
-notInGlobalServer: "&cГлобальный чат отключен на этом сервере."
-notInLocalServer: "&cЛокальный чат отключен на этом сервере."
+enableGlobal: "<yellow>Теперь вы говорите в <aqua>глобальном чате<yellow>."
+enableStaffchat: "<yellow>Теперь вы говорите в <green>чате для персонала<yellow>."
+enableLocal: "<yellow>Теперь вы говорите в <red>локальном чате<yellow>."
+globalIsDefault: "<yellow>Глобальный чат уже установлен как стандартный чат."
+localIsDefault: "<yellow>Локальный чат уже установлен как стандартный чат."
+backToDefault: "<red>Функция, связанная с данным чатом, была отключена или ваши права на этот чат были отозваны. Теперь вы говорите в чате, установленном по умолчанию."
+notInGlobalServer: "<red>Глобальный чат отключен на этом сервере."
+notInLocalServer: "<red>Локальный чат отключен на этом сервере."
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&cВы не можете отправить личное сообщение самому себе."
-enableMessager: "&eВы &aвключили&e личные сообщения."
-disableMessager: "&eВы &cотключили&e личные сообщения."
-noReply: "&cВы ни с кем не разговаривали, чтобы ответить."
-replyOffline: "&cИгрок, с которым вы разговаривали, не в сети."
-hasMessagerDisabled: "&c%name% отключил личные сообщения."
+messageYourself: "<red>Вы не можете отправить личное сообщение самому себе."
+enableMessager: "<yellow>Вы <green>включили<yellow> личные сообщения."
+disableMessager: "<yellow>Вы <red>отключили<yellow> личные сообщения."
+noReply: "<red>Вы ни с кем не разговаривали, чтобы ответить."
+replyOffline: "<red>Игрок, с которым вы разговаривали, не в сети."
+hasMessagerDisabled: "<red>%name% отключил личные сообщения."
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&eВы &aвключили&e невидимку."
-disableVanish: "&eВы &cвыключили&e невидимку."
+enableVanish: "<yellow>Вы <green>включили<yellow> невидимку."
+disableVanish: "<yellow>Вы <red>выключили<yellow> невидимку."
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% очистил локальный чат."
-clearedGlobal: "&e%name% очистил глобальный чат."
+clearedLocal: "<yellow>%name% очистил локальный чат."
+clearedGlobal: "<yellow>%name% очистил глобальный чат."
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&cЭтот игрок не имеет мута."
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>Этот игрок не имеет мута."
 muteIsMuted: "Этот игрок уже имеет мут."
-unmute: "&eУ игрока &c%name% &eбыл снят мут."
-mute: "&eИгроку &c%name% &eбыл выдан мут."
-tempmute: "&eИгрок &c%name% &eполучил временный мут до %muted_until%"
+unmute: "<yellow>У игрока <red>%name% <yellow>был снят мут."
+mute: "<yellow>Игроку <red>%name% <yellow>был выдан мут."
+tempmute: "<yellow>Игрок <red>%name% <yellow>получил временный мут до %muted_until%"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&eПрослушка ЛС была &aвключена&e."
-disableSocialSpy: "&eПрослушка ЛС была &cвыключен&e."
-enableLocalSpy: "&eПрослушка локального чата была &aвключен&e."
-disableLocalSpy: "&eПрослушка локального чата была &cвыключен&e."
+enableSocialSpy: "<yellow>Прослушка ЛС была <green>включена<yellow>."
+disableSocialSpy: "<yellow>Прослушка ЛС была <red>выключен<yellow>."
+enableLocalSpy: "<yellow>Прослушка локального чата была <green>включен<yellow>."
+disableLocalSpy: "<yellow>Прослушка локального чата была <red>выключен<yellow>."
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&cЭту команду можно выполнить только от имени игрока."
-playerNotFound: "&cИгрок не найден."
-incorrectUsage: "&cНеправильное использование. Правильное использование: %command%"
-noPermission: "&cУ вас недостаточно прав для выполнения данной команды."
-messageBlank: "&cСообщение не может быть пустым."
-unknownServer: "&cНеизвестный сервер \"&b%unknown_server%&c\""
+notPlayer: "<red>Эту команду можно выполнить только от имени игрока."
+playerNotFound: "<red>Игрок не найден."
+incorrectUsage: "<red>Неправильное использование. Правильное использование: %command%"
+noPermission: "<red>У вас недостаточно прав для выполнения данной команды."
+messageBlank: "<red>Сообщение не может быть пустым."
+unknownServer: "<red>Неизвестный сервер \"<aqua>%unknown_server%<red>\""
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% внес вас в черный список."
-addIgnore: "&eВы внесли %name% в черный список."
-removeIgnore: "&eВы удалили %name% из черного списка."
-alreadyIgnored: "&eЭтот игрок уже находится в вашем черном списке."
-ignoreYourself: "&cВы не можете внести в черный список самого себя."
-unignoreYourself: "&cВы не можете удалить из черного списка самого себя."
-notIgnored: "&cУказанного игрока нет в вашем черном списке."
-ignoreList: "&eИгроки онлайн, которые находятся в черном списке: &b%message%&e."
-ignoreNobody: "&aНи один игрок&e из вашего черного списка сейчас не онлайн."
+hasIgnored: "<red>%target_name% внес вас в черный список."
+addIgnore: "<yellow>Вы внесли %name% в черный список."
+removeIgnore: "<yellow>Вы удалили %name% из черного списка."
+alreadyIgnored: "<yellow>Этот игрок уже находится в вашем черном списке."
+ignoreYourself: "<red>Вы не можете внести в черный список самого себя."
+unignoreYourself: "<red>Вы не можете удалить из черного списка самого себя."
+notIgnored: "<red>Указанного игрока нет в вашем черном списке."
+ignoreList: "<yellow>Игроки онлайн, которые находятся в черном списке: <aqua>%message%<yellow>."
+ignoreNobody: "<green>Ни один игрок<yellow> из вашего черного списка сейчас не онлайн."
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&cПожалуйста, не рекламируйте что-либо в чате."
-antiDuplication: "&cПожалуйста, не спамьте в чат."
+antiAdvertise: "<red>Пожалуйста, не рекламируйте что-либо в чате."
+antiDuplication: "<red>Пожалуйста, не спамьте в чат."
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&eЧат был отключен."
-disableChatlock: "&eЧат был включен."
-chatIsLocked: "&cВы не можете писать в чат, так как он был отключен."
+enableChatlock: "<yellow>Чат был отключен."
+disableChatlock: "<yellow>Чат был включен."
+chatIsLocked: "<red>Вы не можете писать в чат, так как он был отключен."
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<blue>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"

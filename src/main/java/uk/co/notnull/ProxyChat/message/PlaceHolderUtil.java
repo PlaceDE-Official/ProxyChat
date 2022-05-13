@@ -72,9 +72,9 @@ public class PlaceHolderUtil {
         loadFormatsBase();
       }
 
-      return ComponentUtil.legacySerializer.deserialize(formatsBase.getString(format.getStringPath()));
+      return ComponentUtil.miniMessage.deserialize(formatsBase.getString(format.getStringPath()));
     } catch (RuntimeException e) {
-      return ComponentUtil.legacySerializer.deserialize(format.getStringPath());
+      return ComponentUtil.miniMessage.deserialize(format.getStringPath());
     }
   }
 
@@ -96,9 +96,9 @@ public class PlaceHolderUtil {
         loadMessageBase();
       }
 
-      return ComponentUtil.legacySerializer.deserialize(messageBase.translateWithFallback(message));
+      return ComponentUtil.miniMessage.deserialize(messageBase.translateWithFallback(message));
     } catch (RuntimeException e) {
-      return ComponentUtil.legacySerializer.deserialize(message.getStringPath());
+      return ComponentUtil.miniMessage.deserialize(message.getStringPath());
     }
   }
 

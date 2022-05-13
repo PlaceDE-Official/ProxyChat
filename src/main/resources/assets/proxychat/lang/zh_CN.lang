@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,99 +28,99 @@ inherit: en_US
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&e你已进入 &b跨服聊天频道&e！"
-enableStaffchat: "&e你已进入 &aStaff聊天频道&e！"
-enableLocal: "&e你已进入 &c本地聊天频道&e!"
-globalIsDefault: "&e跨服聊天频道已经是默认的聊天频道了！"
-localIsDefault: "&e本地聊天平道已经是默认的！"
-backToDefault: "&c聊天频道或者您的允许被删掉了, 所以您被放到默认的聊天频道。"
-notInGlobalServer: "&c跨服聊天功能未启用, 请联系管理员..."
-notInLocalServer: "&c这个服务器上不允许用本地聊天！"
+enableGlobal: "<yellow>你已进入 <aqua>跨服聊天频道<yellow>！"
+enableStaffchat: "<yellow>你已进入 <green>Staff聊天频道<yellow>！"
+enableLocal: "<yellow>你已进入 <red>本地聊天频道<yellow>!"
+globalIsDefault: "<yellow>跨服聊天频道已经是默认的聊天频道了！"
+localIsDefault: "<yellow>本地聊天平道已经是默认的！"
+backToDefault: "<red>聊天频道或者您的允许被删掉了, 所以您被放到默认的聊天频道。"
+notInGlobalServer: "<red>跨服聊天功能未启用, 请联系管理员..."
+notInLocalServer: "<red>这个服务器上不允许用本地聊天！"
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&c你不能给自己发送私聊信息..."
-enableMessager: "&e接收私聊信息已设为 &a开启&e！"
-enableMessagerOthers: "&e%name%先摘&a会&e接收心意了！"
-disableMessager: "&e接收私聊信息已设为 &c关闭&e。"
-disableMessagerOthers: "&e%name%先摘&c不会&e接收心意了。"
-noReply: "&c404 Not Found. 私聊对象未找到。"
-replyOffline: "&c和你私聊的玩家已经下线了。"
-hasMessagerDisabled: "&c%name% 不接受私聊信息！"
+messageYourself: "<red>你不能给自己发送私聊信息..."
+enableMessager: "<yellow>接收私聊信息已设为 <green>开启<yellow>！"
+enableMessagerOthers: "<yellow>%name%先摘<green>会<yellow>接收心意了！"
+disableMessager: "<yellow>接收私聊信息已设为 <red>关闭<yellow>。"
+disableMessagerOthers: "<yellow>%name%先摘<red>不会<yellow>接收心意了。"
+noReply: "<red>404 Not Found. 私聊对象未找到。"
+replyOffline: "<red>和你私聊的玩家已经下线了。"
+hasMessagerDisabled: "<red>%name% 不接受私聊信息！"
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&e你在聊天频道中 &a开启了&e 隐身模式！"
-disableVanish: "&e你在聊天频道中 &c关闭了&e 隐身模式!"
+enableVanish: "<yellow>你在聊天频道中 <green>开启了<yellow> 隐身模式！"
+disableVanish: "<yellow>你在聊天频道中 <red>关闭了<yellow> 隐身模式!"
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% 已清除本地聊天内容。"
-clearedGlobal: "&e%name% 已清除跨服聊天内容。"
+clearedLocal: "<yellow>%name% 已清除本地聊天内容。"
+clearedGlobal: "<yellow>%name% 已清除跨服聊天内容。"
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&c该玩家未被禁言！"
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>该玩家未被禁言！"
 muteIsMuted: "该玩家已经被禁言了！"
-unmute: "&e玩家 &c%name% &e已被解除禁言！"
-mute: "&e玩家 &c%name% &e已被永久禁言！"
-tempmute: "&e玩家 &c%name% &e已被临时禁止发言，直至"
+unmute: "<yellow>玩家 <red>%name% <yellow>已被解除禁言！"
+mute: "<yellow>玩家 <red>%name% <yellow>已被永久禁言！"
+tempmute: "<yellow>玩家 <red>%name% <yellow>已被临时禁止发言，直至"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&eSocialSpy &a已开启&e！"
-disableSocialSpy: "&eSocialSpy &c已关闭&e！"
-enableLocalSpy: "&eLocalSpy &a已开启&e！"
-disableLocalSpy: "&eLocalSpy &c已关闭&e！"
+enableSocialSpy: "<yellow>SocialSpy <green>已开启<yellow>！"
+disableSocialSpy: "<yellow>SocialSpy <red>已关闭<yellow>！"
+enableLocalSpy: "<yellow>LocalSpy <green>已开启<yellow>！"
+disableLocalSpy: "<yellow>LocalSpy <red>已关闭<yellow>！"
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&c只有玩家才能使用该命令！"
-playerNotFound: "&c无法找到对应玩家..."
-incorrectUsage: "&c命令语法错误！ 请参考正确的命令形式： %command%"
-noPermission: "&c你没有相应权限！"
-messageBlank: "&c信息不能是空的！"
-unknownServer: "&c没有叫\"&b%unknown_server%&c\"的服务器！"
+notPlayer: "<red>只有玩家才能使用该命令！"
+playerNotFound: "<red>无法找到对应玩家..."
+incorrectUsage: "<red>命令语法错误！ 请参考正确的命令形式： %command%"
+noPermission: "<red>你没有相应权限！"
+messageBlank: "<red>信息不能是空的！"
+unknownServer: "<red>没有叫\"<aqua>%unknown_server%<red>\"的服务器！"
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% 拒收了你的私聊消息..."
-addIgnore: "&e已将 %name% 加入黑名单! 拒收其私聊消息。"
-removeIgnore: "&e已将 %name% 移出黑名单! 现在可以正常接收其私聊信息了。"
-alreadyIgnored: "&e该玩家已经在你的拒收黑名单里了！"
-ignoreYourself: "&c你不能把自己加入拒收黑名单！"
-unignoreYourself: "&c你不能把自己移出拒收黑名单！"
-notIgnored: "&c该玩家尚未被你加入过拒收黑名单！"
-ignoreList: "&e拒收黑名单中的在线玩家: &b%message%&e。"
-ignoreNobody: "&e在线玩家 &aanyone&e 中没有任何人在你的拒收黑名单上！"
+hasIgnored: "<red>%target_name% 拒收了你的私聊消息..."
+addIgnore: "<yellow>已将 %name% 加入黑名单! 拒收其私聊消息。"
+removeIgnore: "<yellow>已将 %name% 移出黑名单! 现在可以正常接收其私聊信息了。"
+alreadyIgnored: "<yellow>该玩家已经在你的拒收黑名单里了！"
+ignoreYourself: "<red>你不能把自己加入拒收黑名单！"
+unignoreYourself: "<red>你不能把自己移出拒收黑名单！"
+notIgnored: "<red>该玩家尚未被你加入过拒收黑名单！"
+ignoreList: "<yellow>拒收黑名单中的在线玩家: <aqua>%message%<yellow>。"
+ignoreNobody: "<yellow>在线玩家 <green>anyone<yellow> 中没有任何人在你的拒收黑名单上！"
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&c请勿发布垃圾信息！"
-antiCapslock: "&c请您不用大写锁定！"
-antiDuplication: "&c请您不重复写信息！"
-antiSpam: "&c请您送信息慢一点！"
+antiAdvertise: "<red>请勿发布垃圾信息！"
+antiCapslock: "<red>请您不用大写锁定！"
+antiDuplication: "<red>请您不重复写信息！"
+antiSpam: "<red>请您送信息慢一点！"
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&e聊天功能已被禁用！"
-disableChatlock: "&e聊天功能已启用！"
-chatIsLocked: "&c全员禁言中，只有管理员可以发言！"
+enableChatlock: "<yellow>聊天功能已被禁用！"
+disableChatlock: "<yellow>聊天功能已启用！"
+chatIsLocked: "<red>全员禁言中，只有管理员可以发言！"
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<blue>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"

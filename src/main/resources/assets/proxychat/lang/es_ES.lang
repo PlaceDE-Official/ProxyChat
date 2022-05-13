@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,97 +28,97 @@ inherit: en_US
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&e¡Ahora estás hablando en el &bchat global&e!"
-enableStaffchat: "&e¡Ahora estás hablando en el &achat del staff&e!"
-enableLocal: "&e¡Ahora estás hablando en el &cchat local&e!"
-globalIsDefault: "&e¡El chat global ya es el modo de chat predeterminado!"
-localIsDefault: "&e¡El chat local ya es el modo de chat predeterminado!"
-backToDefault: "&c¡La función vinculada al canal en el que estaba hablando se ha deshabilitado o se han eliminado sus permisos! Ahora estás hablando en el canal predeterminado."
-notInGlobalServer: "&cEl chat global no está habilitado en este servidor..."
-notInLocalServer: "&cEl chat local no está habilitado en este servidor..."
+enableGlobal: "<yellow>¡Ahora estás hablando en el <aqua>chat global<yellow>!"
+enableStaffchat: "<yellow>¡Ahora estás hablando en el <green>chat del staff<yellow>!"
+enableLocal: "<yellow>¡Ahora estás hablando en el <red>chat local<yellow>!"
+globalIsDefault: "<yellow>¡El chat global ya es el modo de chat predeterminado!"
+localIsDefault: "<yellow>¡El chat local ya es el modo de chat predeterminado!"
+backToDefault: "<red>¡La función vinculada al canal en el que estaba hablando se ha deshabilitado o se han eliminado sus permisos! Ahora estás hablando en el canal predeterminado."
+notInGlobalServer: "<red>El chat global no está habilitado en este servidor..."
+notInLocalServer: "<red>El chat local no está habilitado en este servidor..."
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&cNo puedes enviarte un mensaje privado..."
-enableMessager: "&e¡Has &ahabilitado&e la mensajería!"
-disableMessager: "&eHas &cdeshabilitado&e la mensajería"
-noReply: "&cNo tienes a quien responder"
-replyOffline: "&cEl jugador con el que estabas chateando ya no está en línea."
-hasMessagerDisabled: "&c¡%name% tiene la mensajería deshabilitada!"
+messageYourself: "<red>No puedes enviarte un mensaje privado..."
+enableMessager: "<yellow>¡Has <green>habilitado<yellow> la mensajería!"
+disableMessager: "<yellow>Has <red>deshabilitado<yellow> la mensajería"
+noReply: "<red>No tienes a quien responder"
+replyOffline: "<red>El jugador con el que estabas chateando ya no está en línea."
+hasMessagerDisabled: "<red>¡%name% tiene la mensajería deshabilitada!"
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&e¡Has &ahabilitado&e el modo oculto!"
-disableVanish: "&e¡Has &cdeshabilitado&e el modo oculto!"
+enableVanish: "<yellow>¡Has <green>habilitado<yellow> el modo oculto!"
+disableVanish: "<yellow>¡Has <red>deshabilitado<yellow> el modo oculto!"
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% ha borrado el chat localmente."
-clearedGlobal: "&e%name% ha borrado el chat globalmente."
+clearedLocal: "<yellow>%name% ha borrado el chat localmente."
+clearedGlobal: "<yellow>%name% ha borrado el chat globalmente."
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&c¡Este jugador no está silenciado!"
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>¡Este jugador no está silenciado!"
 muteIsMuted: "¡Este jugador ya está silenciado!"
-unmute: "&e¡El jugador &c%name% &eha sido desilenciado!"
-mute: "&e¡El jugador &c%name% &eha sido silenciado!"
-tempmute: "&eEl juagor &c%name% &eha sido silenciado hasta %muted_until%"
+unmute: "<yellow>¡El jugador <red>%name% <yellow>ha sido desilenciado!"
+mute: "<yellow>¡El jugador <red>%name% <yellow>ha sido silenciado!"
+tempmute: "<yellow>El juagor <red>%name% <yellow>ha sido silenciado hasta %muted_until%"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&e¡SocialSpy ha sido &ahabilitado&e!"
-disableSocialSpy: "&e¡SocialSpy ha sido &cdeshabilitado&e!"
-enableLocalSpy: "&e¡LocalSpy ha sido &ahabilitado&e!"
-disableLocalSpy: "&e¡LocalSpy ha sido &cdeshabilitado&e!"
+enableSocialSpy: "<yellow>¡SocialSpy ha sido <green>habilitado<yellow>!"
+disableSocialSpy: "<yellow>¡SocialSpy ha sido <red>deshabilitado<yellow>!"
+enableLocalSpy: "<yellow>¡LocalSpy ha sido <green>habilitado<yellow>!"
+disableLocalSpy: "<yellow>¡LocalSpy ha sido <red>deshabilitado<yellow>!"
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&c¡Tienes que ser un jugador para usar este comando!"
-playerNotFound: "&cNo se pudo encontrar el jugador..."
-incorrectUsage: "&c¡Sintáxis incorrecta! Usa el commando así: %command%"
-noPermission: "&c¡No tienes permiso para realizar esta acción!"
-messageBlank: "&c¡El mensaje no puede esta vacío!"
-unknownServer: "&cServidor desconocido \"&b%unknown_server%&c\""
+notPlayer: "<red>¡Tienes que ser un jugador para usar este comando!"
+playerNotFound: "<red>No se pudo encontrar el jugador..."
+incorrectUsage: "<red>¡Sintáxis incorrecta! Usa el commando así: %command%"
+noPermission: "<red>¡No tienes permiso para realizar esta acción!"
+messageBlank: "<red>¡El mensaje no puede esta vacío!"
+unknownServer: "<red>Servidor desconocido \"<aqua>%unknown_server%<red>\""
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% te está ignorando..."
-addIgnore: "&eIgnoraste a %name%!"
-removeIgnore: "&eYa no estas ignorando a %name%!"
-alreadyIgnored: "&e¡Ya estás ignorando a este jugador!"
-ignoreYourself: "&c¡No puedes ignorarte a ti mismo!"
-unignoreYourself: "&c¡No puedes dejar de ignorarte a ti mismo!"
-notIgnored: "&c¡No has ignorado a este jugador!"
-ignoreList: "&eJugadores en línea que has ignorado: &b%message%&e."
-ignoreNobody: "&e¡No estás ignorando a &aalguien&e que este en línea!"
+hasIgnored: "<red>%target_name% te está ignorando..."
+addIgnore: "<yellow>Ignoraste a %name%!"
+removeIgnore: "<yellow>Ya no estas ignorando a %name%!"
+alreadyIgnored: "<yellow>¡Ya estás ignorando a este jugador!"
+ignoreYourself: "<red>¡No puedes ignorarte a ti mismo!"
+unignoreYourself: "<red>¡No puedes dejar de ignorarte a ti mismo!"
+notIgnored: "<red>¡No has ignorado a este jugador!"
+ignoreList: "<yellow>Jugadores en línea que has ignorado: <aqua>%message%<yellow>."
+ignoreNobody: "<yellow>¡No estás ignorando a <green>alguien<yellow> que este en línea!"
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&c¡Por favor no publicites!"
-antiCapslock: "&c¡Por favor no uses el bloq mayús!"
-antiDuplication: "&c¡Por favor no envíes el mismo mensaje!"
-antiSpam: "&c¡No enviés mensajes tan rápido!"
+antiAdvertise: "<red>¡Por favor no publicites!"
+antiCapslock: "<red>¡Por favor no uses el bloq mayús!"
+antiDuplication: "<red>¡Por favor no envíes el mismo mensaje!"
+antiSpam: "<red>¡No enviés mensajes tan rápido!"
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&e¡Los mensajes fueron deshabilitados!"
-disableChatlock: "&e¡Los mensajes fueron habilitados!"
-chatIsLocked: "&c¡No puedes hablar en este momento, el chat está bloqueado!"
+enableChatlock: "<yellow>¡Los mensajes fueron deshabilitados!"
+disableChatlock: "<yellow>¡Los mensajes fueron habilitados!"
+chatIsLocked: "<red>¡No puedes hablar en este momento, el chat está bloqueado!"
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<blue>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"

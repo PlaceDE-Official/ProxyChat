@@ -16,7 +16,7 @@
 # If you have translated this into another language, please create an pull request on our GitHub
 # repo, so that everyone can use it!
 # https://github.com/JLyne/ProxyChat/pulls
-# (Use http://patorjk.com/software/taag/#h=0&v=0&c=bash&f=Standard for ASCII-Art header and copy
+# (Use http://patorjk.com/software/taag/#h=0&v=0<red>=bash&f=Standard for ASCII-Art header and copy
 # this note. Thanks!)
 ####################################################################################################
 
@@ -28,97 +28,97 @@ inherit: en_US
 ####################################################################################################
 # Channel Type Messages
 ####################################################################################################
-enableGlobal: "&eDu snakker nå i &bglobal chat&e!"
-enableStaffchat: "&eDu snakker nå i &astaff chat&e!"
-enableLocal: "&eDu snakker nå i &clokal chat&e!"
-globalIsDefault: "&eGlobal chat er allerede standard chat modus!"
-localIsDefault: "&eLocal chat er allerede standard chat modus!"
-backToDefault: "&cEgenskapen lenket til kanalen du pratet i har blitt deaktivert eller tilgangen din har blitt fjernet. Du snakker nå i standard kanalen."
-notInGlobalServer: "&cGlobal chat er ikke aktivert på denne serveren..."
-notInLocalServer: "&cLocal chat er ikke aktivert på denne serveren..."
+enableGlobal: "<yellow>Du snakker nå i <aqua>global chat<yellow>!"
+enableStaffchat: "<yellow>Du snakker nå i <green>staff chat<yellow>!"
+enableLocal: "<yellow>Du snakker nå i <red>lokal chat<yellow>!"
+globalIsDefault: "<yellow>Global chat er allerede standard chat modus!"
+localIsDefault: "<yellow>Local chat er allerede standard chat modus!"
+backToDefault: "<red>Egenskapen lenket til kanalen du pratet i har blitt deaktivert eller tilgangen din har blitt fjernet. Du snakker nå i standard kanalen."
+notInGlobalServer: "<red>Global chat er ikke aktivert på denne serveren..."
+notInLocalServer: "<red>Local chat er ikke aktivert på denne serveren..."
 
 ####################################################################################################
 # Messenger Messages
 ####################################################################################################
-messageYourself: "&cDu kan ikke sende en privat melding til deg selv..."
-enableMessager: "&eDu har &aaktivert&e private meldinger!"
-disableMessager: "&eDu har &cdeaktivert&e private meldinger!"
-noReply: "&cDu har ingen private meldinger og svare på"
-replyOffline: "&cSpilleren du snakket med er ikke lengre pålogget."
-hasMessagerDisabled: "&c%name% har deaktivert private meldinger!"
+messageYourself: "<red>Du kan ikke sende en privat melding til deg selv..."
+enableMessager: "<yellow>Du har <green>aktivert<yellow> private meldinger!"
+disableMessager: "<yellow>Du har <red>deaktivert<yellow> private meldinger!"
+noReply: "<red>Du har ingen private meldinger og svare på"
+replyOffline: "<red>Spilleren du snakket med er ikke lengre pålogget."
+hasMessagerDisabled: "<red>%name% har deaktivert private meldinger!"
 
 ####################################################################################################
 # Vanish Messages
 ####################################################################################################
-enableVanish: "&eDu har &aaktivert&e gjem deg modus!"
-disableVanish: "&eDu har &cdeaktivert&e gjem deg modus!"
+enableVanish: "<yellow>Du har <green>aktivert<yellow> gjem deg modus!"
+disableVanish: "<yellow>Du har <red>deaktivert<yellow> gjem deg modus!"
 
 ####################################################################################################
 # Clear Chat Messages
 ####################################################################################################
-clearedLocal: "&e%name% har renset chatten lokalt."
-clearedGlobal: "&e%name% har renset chatten globalt."
+clearedLocal: "<yellow>%name% har renset chatten lokalt."
+clearedGlobal: "<yellow>%name% har renset chatten globalt."
 
 ####################################################################################################
 # Mute Messages
 ####################################################################################################
-muted: "&c&lMuted > &eYou have been muted and cannot chat right now."
-unmuteNotMuted: "&cDenne spilleren er ikke mutet!"
+muted: "<red><bold>Muted > <yellow>You have been muted and cannot chat right now."
+unmuteNotMuted: "<red>Denne spilleren er ikke mutet!"
 muteIsMuted: "Denne spilleren er allerede mutet!"
-unmute: "&eSpilleren &c%name% &eer ikke lengre mutet!"
-mute: "&eSpilleren &c%name% &ehar blitt mutet!"
-tempmute: "&eSpilleren &c%name% &ehar blitt mutet til %muted_until%"
+unmute: "<yellow>Spilleren <red>%name% <yellow>er ikke lengre mutet!"
+mute: "<yellow>Spilleren <red>%name% <yellow>har blitt mutet!"
+tempmute: "<yellow>Spilleren <red>%name% <yellow>har blitt mutet til %muted_until%"
 
 ####################################################################################################
 # Spy Messages
 ####################################################################################################
-enableSocialSpy: "&eSocialSpy har blitt &aaktivert&e!"
-disableSocialSpy: "&eSocialSpy har blitt &cdeaktivert&e!"
-enableLocalSpy: "&eLocalSpy har blitt &aaktivert&e!"
-disableLocalSpy: "&eLocalSpy har blitt &cdeaktivert&e!"
+enableSocialSpy: "<yellow>SocialSpy har blitt <green>aktivert<yellow>!"
+disableSocialSpy: "<yellow>SocialSpy har blitt <red>deaktivert<yellow>!"
+enableLocalSpy: "<yellow>LocalSpy har blitt <green>aktivert<yellow>!"
+disableLocalSpy: "<yellow>LocalSpy har blitt <red>deaktivert<yellow>!"
 
 ####################################################################################################
 # Error Messages
 ####################################################################################################
-notPlayer: "&cKun spillere kan utføre denne kommandoen!"
-playerNotFound: "&cFinner ikke spilleren.."
-incorrectUsage: "&cUgyldig format! Bruk kommandoen slik: %command%"
-noPermission: "&cDu har ikke tilgang til og utføre denne handlingen!"
-messageBlank: "&cMeldingen kan ikke være blank / tom!"
-unknownServer: "&cUkjent server \"&b%unknown_server%&c\""
+notPlayer: "<red>Kun spillere kan utføre denne kommandoen!"
+playerNotFound: "<red>Finner ikke spilleren.."
+incorrectUsage: "<red>Ugyldig format! Bruk kommandoen slik: %command%"
+noPermission: "<red>Du har ikke tilgang til og utføre denne handlingen!"
+messageBlank: "<red>Meldingen kan ikke være blank / tom!"
+unknownServer: "<red>Ukjent server \"<aqua>%unknown_server%<red>\""
 
 ####################################################################################################
 # Ignore Messages
 ####################################################################################################
-hasIgnored: "&c%target_name% ignorerer deg..."
-addIgnore: "&eDu ignorerer nå %name%!"
-removeIgnore: "&eDu ignorer ikke lengre %name%!"
-alreadyIgnored: "&eDu ignorerer allerede denne spilleren!"
-ignoreYourself: "&cDu kan ikke ignorere deg selv!"
-unignoreYourself: "&cDu kan ikke fjerne en ignorer på deg selv!"
-notIgnored: "&cDu har ikke ignorert denne spilleren!"
-ignoreList: "&ePåloggede spillere du ignorerer: &b%message%&e."
-ignoreNobody: "&eDu ignorerer &aingen&e spillere som er pålogget!"
+hasIgnored: "<red>%target_name% ignorerer deg..."
+addIgnore: "<yellow>Du ignorerer nå %name%!"
+removeIgnore: "<yellow>Du ignorer ikke lengre %name%!"
+alreadyIgnored: "<yellow>Du ignorerer allerede denne spilleren!"
+ignoreYourself: "<red>Du kan ikke ignorere deg selv!"
+unignoreYourself: "<red>Du kan ikke fjerne en ignorer på deg selv!"
+notIgnored: "<red>Du har ikke ignorert denne spilleren!"
+ignoreList: "<yellow>Påloggede spillere du ignorerer: <aqua>%message%<yellow>."
+ignoreNobody: "<yellow>Du ignorerer <green>ingen<yellow> spillere som er pålogget!"
 
 ####################################################################################################
 # Filter Messages
 ####################################################################################################
-antiAdvertise: "&cVennligst ikke reklamer!"
-antiCapslock: "&cVennligst ikke bruk CAPSLOCK!"
-antiDuplication: "&cDu har alt skrevet denne meldingen. Vennligst ikke gjenta deg selv!"
-antiSpam: "&cVennligst ro ned, du skriver for fort!"
+antiAdvertise: "<red>Vennligst ikke reklamer!"
+antiCapslock: "<red>Vennligst ikke bruk CAPSLOCK!"
+antiDuplication: "<red>Du har alt skrevet denne meldingen. Vennligst ikke gjenta deg selv!"
+antiSpam: "<red>Vennligst ro ned, du skriver for fort!"
 
 ####################################################################################################
 # ChatLock Messages
 ####################################################################################################
-enableChatlock: "&eChatting har blitt deaktivert!"
-disableChatlock: "&eChatting har blitt aktivert!"
-chatIsLocked: "&cDu kan ikke skrive i chatten, chatten er låst!"
+enableChatlock: "<yellow>Chatting har blitt deaktivert!"
+disableChatlock: "<yellow>Chatting har blitt aktivert!"
+chatIsLocked: "<red>Du kan ikke skrive i chatten, chatten er låst!"
 
 ####################################################################################################
 # Misc plugin messages
 ####################################################################################################
-pluginPrefix: "&9Proxy Chat &8// "
-pluginReloaded: "%plugin_prefix%&aThe plugin has been reloaded!"
-pluginActiveModules: "%plugin_prefix%&7Active Modules: &a"
+pluginPrefix: "<blue>Proxy Chat <dark_gray>// "
+pluginReloaded: "%plugin_prefix%<green>The plugin has been reloaded!"
+pluginActiveModules: "%plugin_prefix%<gray>Active Modules: <green>"
 pluginCredits: "%plugin_prefix%Ported to Velocity by Jim. Based on BungeeChat 2 by BrainStone and shawn_ian"
