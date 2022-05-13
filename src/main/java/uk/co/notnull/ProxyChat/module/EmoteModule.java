@@ -85,6 +85,7 @@ public class EmoteModule extends Module {
 		emotesByCharacter.clear();
 		emotesByCategory.clear();
 		emotesCommand.unregister();
+		emotesList = null;
 
 		FilterManager.removePreParseFilter(getName());
 		FilterManager.removePostParseFilter(getName());
