@@ -21,6 +21,7 @@
 
 package uk.co.notnull.ProxyChat.command;
 
+import net.kyori.adventure.text.Component;
 import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.message.Messages;
 import uk.co.notnull.ProxyChat.message.MessagesService;
@@ -66,7 +67,7 @@ public class ProxyChatCommand extends BaseCommand {
       } else if (invocation.arguments()[0].equalsIgnoreCase("modules")
           && PermissionManager.hasPermission(invocation.source(), Permission.PROXYCHAT_MODULES)) {
         MessagesService.sendMessage(invocation.source(), Messages.PLUGIN_MODULES.get());
-        MessagesService.sendMessage(invocation.source(), ProxyChatModuleManager.getActiveModuleString());
+        MessagesService.sendMessage(invocation.source(), Component.text(ProxyChatModuleManager.getActiveModuleString()));
         return;
       }
     }

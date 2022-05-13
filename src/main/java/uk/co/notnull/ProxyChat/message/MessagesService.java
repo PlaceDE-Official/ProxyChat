@@ -331,7 +331,7 @@ public class MessagesService {
 				message = FilterManager.applyFilters(account, message);
 			} catch (BlockMessageException e) {
 				if (!ignoreBlockMessageExceptions) {
-					MessagesService.sendMessage(player, e.getMessage());
+					MessagesService.sendMessage(player, e.getComponent());
 
 					return Optional.empty();
 				}
@@ -355,7 +355,7 @@ public class MessagesService {
 				message = FilterManager.applyFilters(playerAccount, message);
 				context.setFilteredMessage(message);
 			} catch (BlockMessageException e) {
-				MessagesService.sendMessage(player, e.getMessage());
+				MessagesService.sendMessage(player, e.getComponent());
 
 				return false;
 			}
@@ -472,13 +472,6 @@ public class MessagesService {
 				&& !sender.hasPermission(Permission.BYPASS_IGNORE))
 				? account -> !account.hasIgnored(sender)
 				: account -> true;
-	}
-
-	public void sendMessage(CommandSource recipient, String message) {
-		if ((message == null) || message.isEmpty()) return;
-
-		recipient.sendMessage(Identity.nil(), LegacyComponentSerializer.builder().extractUrls().hexColors().build()
-									  .deserialize(message));
 	}
 
 	public void sendMessage(CommandSource recipient, Component message) {

@@ -21,6 +21,10 @@
 
 package uk.co.notnull.ProxyChat.api.filter;
 
+import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+
 /**
  * This exception is not really an exception. It is used in filters to indicate that the message
  * should not be sent and instead that the sending user should be warned with the passed message.
@@ -28,13 +32,25 @@ package uk.co.notnull.ProxyChat.api.filter;
 public class BlockMessageException extends Exception {
   private static final long serialVersionUID = -2629372445468034714L;
 
+  @Getter
+  private final Component component;
+
+  @Getter
+  private final String message;
+
   /**
    * Construct a new {@link BlockMessageException} to indicate that the message should be blocked
    * and not sent but instead the sending user should be warned with the message passed.
    *
    * @param message The warning displayed to the user.
    */
+  public BlockMessageException(Component message) {
+      this.component = message;
+      this.message = PlainTextComponentSerializer.plainText().serialize(message);
+  }
+
   public BlockMessageException(String message) {
-      super(message);
+      this.component = Component.text(message);
+      this.message = message;
   }
 }
