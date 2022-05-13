@@ -51,18 +51,10 @@ import java.util.stream.Stream;
 import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import uk.co.notnull.ProxyChat.util.ComponentUtil;
 
 @UtilityClass
 public class MessagesService {
-	private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
-          .extractUrls(
-				  Style.style().color(TextColor.fromHexString("#8194e4")).decoration(TextDecoration.UNDERLINED, true).build())
-          .character('&').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
-
 	@Setter
 	private List<List<String>> multiCastServerGroups = null;
 
@@ -332,7 +324,7 @@ public class MessagesService {
 
 		ProxyChatAccount account = context.getSender().orElseThrow();
 		CommandSource player = ProxyChatAccountManager.getCommandSource(account).orElseThrow();
-		Component message = PlaceHolderUtil.filterFormatting(context.getParsedMessage().orElseThrow(), account);
+		Component message = ComponentUtil.filterFormatting(context.getParsedMessage().orElseThrow(), account);
 
 		if (runFilters) {
 			try {
@@ -369,7 +361,8 @@ public class MessagesService {
 			}
 		}
 
-		context.setParsedMessage(PlaceHolderUtil.filterFormatting(legacySerializer.deserialize(message), playerAccount));
+		context.setParsedMessage(ComponentUtil.extractUrls(
+				ComponentUtil.filterFormatting(ComponentUtil.legacySerializer.deserialize(message), playerAccount)));
 
 		return true;
 	}

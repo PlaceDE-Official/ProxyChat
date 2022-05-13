@@ -21,23 +21,18 @@
 
 package uk.co.notnull.ProxyChat.message;
 
-import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import uk.co.notnull.ProxyChat.ProxyChat;
-import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.placeholder.ProxyChatContext;
 import uk.co.notnull.ProxyChat.api.placeholder.PlaceHolderManager;
 import uk.co.notnull.ProxyChat.config.Configuration;
-import uk.co.notnull.ProxyChat.api.permission.Permission;
 import dev.aura.lib.messagestranslator.MessagesTranslator;
 import dev.aura.lib.messagestranslator.PluginMessagesTranslator;
 import java.io.File;
-import java.util.*;
-import java.util.stream.Collectors;
+
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.*;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import uk.co.notnull.ProxyChat.util.ComponentUtil;
 
 @UtilityClass
 public class PlaceHolderUtil {
@@ -46,36 +41,8 @@ public class PlaceHolderUtil {
   private static Config formatsBase;
   private static MessagesTranslator messageBase;
 
-  private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
-          .character('&').extractUrls().hexColors().hexCharacter('x').useUnusualXRepeatedCharacterHexFormat().build();
-
   private static final char placeholderChar = PlaceHolderManager.placeholderChar;
   private static final String placeholderString = String.valueOf(placeholderChar);
-
-  private static final ImmutableMap<TextFormat, Permission> permissionMap =
-      ImmutableMap.<TextFormat, Permission>builder()
-          .put(NamedTextColor.BLACK, Permission.USE_CHAT_COLOR_BLACK)
-          .put(NamedTextColor.DARK_BLUE, Permission.USE_CHAT_COLOR_DARK_BLUE)
-          .put(NamedTextColor.DARK_GREEN, Permission.USE_CHAT_COLOR_DARK_GREEN)
-          .put(NamedTextColor.DARK_AQUA, Permission.USE_CHAT_COLOR_DARK_AQUA)
-          .put(NamedTextColor.DARK_RED, Permission.USE_CHAT_COLOR_DARK_RED)
-          .put(NamedTextColor.DARK_PURPLE, Permission.USE_CHAT_COLOR_DARK_PURPLE)
-          .put(NamedTextColor.GOLD, Permission.USE_CHAT_COLOR_GOLD)
-          .put(NamedTextColor.GRAY, Permission.USE_CHAT_COLOR_GRAY)
-          .put(NamedTextColor.DARK_GRAY, Permission.USE_CHAT_COLOR_DARK_GRAY)
-          .put(NamedTextColor.BLUE, Permission.USE_CHAT_COLOR_BLUE)
-          .put(NamedTextColor.GREEN, Permission.USE_CHAT_COLOR_GREEN)
-          .put(NamedTextColor.AQUA, Permission.USE_CHAT_COLOR_AQUA)
-          .put(NamedTextColor.RED, Permission.USE_CHAT_COLOR_RED)
-          .put(NamedTextColor.LIGHT_PURPLE, Permission.USE_CHAT_COLOR_LIGHT_PURPLE)
-          .put(NamedTextColor.YELLOW, Permission.USE_CHAT_COLOR_YELLOW)
-          .put(NamedTextColor.WHITE, Permission.USE_CHAT_COLOR_WHITE)
-          .put(TextDecoration.OBFUSCATED, Permission.USE_CHAT_FORMAT_OBFUSCATED)
-          .put(TextDecoration.BOLD, Permission.USE_CHAT_FORMAT_BOLD)
-          .put(TextDecoration.STRIKETHROUGH, Permission.USE_CHAT_FORMAT_STRIKETHROUGH)
-          .put(TextDecoration.UNDERLINED, Permission.USE_CHAT_FORMAT_UNDERLINE)
-          .put(TextDecoration.ITALIC, Permission.USE_CHAT_FORMAT_ITALIC)
-          .build();
 
   public static void clearConfigSections() {
     formatsBase = null;
@@ -105,9 +72,9 @@ public class PlaceHolderUtil {
         loadFormatsBase();
       }
 
-      return legacySerializer.deserialize(formatsBase.getString(format.getStringPath()));
+      return ComponentUtil.legacySerializer.deserialize(formatsBase.getString(format.getStringPath()));
     } catch (RuntimeException e) {
-      return legacySerializer.deserialize(format.getStringPath());
+      return ComponentUtil.legacySerializer.deserialize(format.getStringPath());
     }
   }
 
@@ -129,9 +96,9 @@ public class PlaceHolderUtil {
         loadMessageBase();
       }
 
-      return legacySerializer.deserialize(messageBase.translateWithFallback(message));
+      return ComponentUtil.legacySerializer.deserialize(messageBase.translateWithFallback(message));
     } catch (RuntimeException e) {
-      return legacySerializer.deserialize(message.getStringPath());
+      return ComponentUtil.legacySerializer.deserialize(message.getStringPath());
     }
   }
 
@@ -177,53 +144,6 @@ public class PlaceHolderUtil {
 
   public static String formatMessageRaw(String message, ProxyChatContext context) {
     return PlaceHolderManager.processMessage(message, context);
-  }
-
-  public static Component filterFormatting(Component message, ProxyChatAccount account) {
-    Style.Builder style = Style.style();
-    TextColor color = message.color();
-
-    //TODO: Permissions for these?
-    style.clickEvent(message.clickEvent());
-    style.hoverEvent(message.hoverEvent());
-    style.insertion(message.insertion());
-    style.font(message.style().font());
-
-    if(color instanceof NamedTextColor) {
-      if(account.hasPermission(permissionMap.get(color))) {
-        style.color(color);
-      }
-    } else if(color != null && account.hasPermission(Permission.USE_CHAT_FORMAT_RGB)) {
-      style.color(color);
-    }
-
-    for(Map.Entry<TextDecoration, TextDecoration.State> entry : message.decorations().entrySet()) {
-      if(entry.getKey() == TextDecoration.UNDERLINED && entry.getValue() == TextDecoration.State.TRUE
-              && message.clickEvent() != null) {
-        style.decoration(entry.getKey(), TextDecoration.State.TRUE);
-        continue;
-      }
-
-      if(entry.getValue() == TextDecoration.State.TRUE) {
-        Permission perm = permissionMap.get(entry.getKey());
-
-        if(perm == null || account.hasPermission(perm)) {
-          style.decoration(entry.getKey(), TextDecoration.State.TRUE);
-        }
-      } else {
-        style.decoration(entry.getKey(), entry.getValue());
-      }
-    }
-
-    message = message.style(style);
-
-    if(!message.children().isEmpty()) {
-      message = message.children(message.children().stream()
-                                         .map(child -> filterFormatting(child, account))
-                                         .collect(Collectors.toList()));
-    }
-
-    return message;
   }
 
   public static String escapePlaceholders(String message) {

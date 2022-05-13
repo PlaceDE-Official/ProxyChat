@@ -26,10 +26,7 @@ import uk.co.notnull.ProxyChat.api.placeholder.ProxyChatContext;
 import uk.co.notnull.ProxyChat.message.MessagesService;
 import uk.co.notnull.ProxyChat.message.PlaceHolderUtil;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import uk.co.notnull.ProxyChat.util.ComponentUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +41,14 @@ public class AutomaticBroadcastTask implements Runnable {
   private int current;
 
   private static final Random rand = new Random();
-  private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
-          .extractUrls(
-                  Style.style().color(TextColor.fromHexString("#8194e4")).decoration(TextDecoration.UNDERLINED, true).build())
-          .character('&').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 
   public AutomaticBroadcastTask(
 		  Predicate<ProxyChatAccount> predicate, List<String> messages, boolean random) {
     this.predicate = predicate;
-
     this.messages = new ArrayList<>();
-    messages.forEach(message -> this.messages.add(legacySerializer.deserialize(message)));
+
+    messages.forEach(message -> this.messages.add(
+            ComponentUtil.extractUrls(ComponentUtil.legacySerializer.deserialize(message))));
 
     size = this.messages.size();
     this.random = random;

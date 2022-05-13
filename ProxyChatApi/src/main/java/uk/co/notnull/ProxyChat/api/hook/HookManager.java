@@ -38,7 +38,7 @@ public class HookManager {
   public static final int DEFAULT_PREFIX_PRIORITY = 100;
   public static final int PERMISSION_PLUGIN_PREFIX_PRIORITY = 200;
   private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
-          .character('&').extractUrls().hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+          .character('&').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 
   private static Map<String, ProxyChatHook> hooks = new LinkedHashMap<>();
 
