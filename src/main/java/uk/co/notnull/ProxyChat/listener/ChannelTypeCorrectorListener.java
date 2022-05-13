@@ -44,7 +44,7 @@ public class ChannelTypeCorrectorListener {
         && !ProxyChatModuleManager.LOCAL_CHAT_MODULE.isEnabled()) return;
 
     Player sender = e.getPlayer();
-    ProxyChatAccount player = AccountManager.getAccount(sender.getUniqueId()).get();
+    ProxyChatAccount player = AccountManager.getAccount(sender.getUniqueId()).orElseThrow();
     ChannelType channel = player.getChannelType();
 
     if (((channel == ChannelType.GLOBAL)

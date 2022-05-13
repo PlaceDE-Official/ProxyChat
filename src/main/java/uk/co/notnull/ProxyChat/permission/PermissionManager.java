@@ -43,7 +43,7 @@ public class PermissionManager {
 
   public static boolean hasPermissionNoMessage(ProxyChatAccount account, Permission permission) {
     return hasPermissionNoMessage(
-			ProxyChatAccountManager.getCommandSource(account).get(), permission);
+			ProxyChatAccountManager.getCommandSource(account).orElseThrow(), permission);
   }
 
   public static boolean hasPermission(Player player, Permission permission) {

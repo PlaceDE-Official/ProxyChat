@@ -38,7 +38,7 @@ public class MutingListener {
     if (e.getPlayer() == null) return;
 
     Player sender = e.getPlayer();
-    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).get();
+    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).orElseThrow();
 
     if (!account.isMuted()) return;
 

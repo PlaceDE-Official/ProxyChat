@@ -23,7 +23,7 @@ package uk.co.notnull.ProxyChat.api.account;
 
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.identity.Identity;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 import uk.co.notnull.ProxyChat.api.enums.AccountType;
 import uk.co.notnull.ProxyChat.api.enums.ChannelType;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
@@ -176,7 +176,7 @@ public class ConsoleAccount implements ProxyChatAccount {
     return true;
   }
 
-  public Identity identity() {
+  public @NotNull Identity identity() {
     return Identity.nil();
   }
 

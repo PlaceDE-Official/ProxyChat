@@ -54,7 +54,7 @@ public class GlobalChatListener {
 
     Player sender = e.getPlayer();
     String message = e.getMessage();
-    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).get();
+    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).orElseThrow();
 
     if (ChatUtils.isCommand(message)) return;
 

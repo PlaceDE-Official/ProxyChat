@@ -36,7 +36,7 @@ public class WelcomeMessageListener {
   public void onPlayerJoin(ProxyChatJoinEvent e) {
     Player player = e.getPlayer();
 
-    ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(player).get();
+    ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(player).orElseThrow();
 
     if (!ProxyChatAccountManager.isNew(proxyChatAccount.getUniqueId())) return;
 

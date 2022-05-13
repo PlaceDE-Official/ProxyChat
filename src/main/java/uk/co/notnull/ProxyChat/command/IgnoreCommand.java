@@ -63,21 +63,22 @@ public class IgnoreCommand extends BaseCommand {
       return;
     }
 
-    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if (invocation.arguments()[0].equalsIgnoreCase("list")) {
-      List<Optional<ProxyChatAccount>> ignored =
+      List<ProxyChatAccount> ignored =
           player.getIgnored().stream()
-              .map(AccountManager::getAccount)
-              .filter(Optional::isPresent)
-              .collect(Collectors.toList());
+                  .map(AccountManager::getAccount)
+                  .filter(Optional::isPresent)
+                  .map(Optional::get)
+                  .collect(Collectors.toList());
 
       if (ignored.size() <= 0) {
         MessagesService.sendMessage(invocation.source(), Messages.IGNORE_NOBODY.get(player));
       } else {
         String list =
             ignored.stream()
-                .map(account -> account.get().getName())
+                .map(ProxyChatAccount::getName)
                 .collect(Collectors.joining(", "));
 
         MessagesService.sendMessage(invocation.source(), Messages.IGNORE_LIST.get(player, list));
@@ -98,7 +99,7 @@ public class IgnoreCommand extends BaseCommand {
         return;
       }
 
-      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).get();
+      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).orElseThrow();
 
       if (target == invocation.source()) {
         MessagesService.sendMessage(invocation.source(), Messages.IGNORE_YOURSELF.get());
@@ -128,7 +129,7 @@ public class IgnoreCommand extends BaseCommand {
         return;
       }
 
-      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).get();
+      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).orElseThrow();
 
       if (target == invocation.source()) {
         MessagesService.sendMessage(invocation.source(), Messages.UNIGNORE_YOURSELF.get());
@@ -164,7 +165,7 @@ public class IgnoreCommand extends BaseCommand {
     }
 
     if(invocation.arguments().length == 2 && ("add".equals(param1) || "remove".equals(param1))) {
-      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).get();
+      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
         return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[1], invocation.source()).stream()
                 .filter(account -> !senderAccount.equals(account))

@@ -54,7 +54,7 @@ public class MessageToggleCommand extends BaseCommand {
         return;
       }
 
-      ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+      ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
       player.toggleMessanger();
 
       if (player.hasMessangerEnabled()) {
@@ -91,7 +91,7 @@ public class MessageToggleCommand extends BaseCommand {
   @Override
   public List<String> suggest(Invocation invocation) {
     if (invocation.arguments().length == 1) {
-      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).get();
+      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
       return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[0], invocation.source()).stream()
           .filter(account -> account.getAccountType() == AccountType.PLAYER)

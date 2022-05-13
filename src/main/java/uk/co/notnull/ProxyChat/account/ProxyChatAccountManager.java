@@ -82,19 +82,15 @@ public class ProxyChatAccountManager extends AccountManager {
     }
   }
 
-  public static Optional<CommandSource> getCommandSource(ProxyChatAccount account) {
+  public static Optional<? extends CommandSource> getCommandSource(@NotNull ProxyChatAccount account) {
     ProxyServer instance = ProxyChat.getInstance().getProxy();
-
-    if(account == null) {
-      return Optional.empty();
-    }
 
     switch (account.getAccountType()) {
       case PLAYER:
-        return Optional.ofNullable(instance.getPlayer(account.getUniqueId()).orElse(null));
+        return instance.getPlayer(account.getUniqueId());
       case CONSOLE:
       default:
-        return Optional.ofNullable(instance.getConsoleCommandSource());
+        return Optional.of(instance.getConsoleCommandSource());
     }
   }
 

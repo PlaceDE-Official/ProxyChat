@@ -44,7 +44,7 @@ public class LocalSpyCommand extends BaseCommand {
       if (!(invocation.source() instanceof Player)) {
         MessagesService.sendMessage(invocation.source(), Messages.NOT_A_PLAYER.get());
       } else {
-        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
         player.toggleLocalSpy();
 
         if (player.hasLocalSpyEnabled()) {

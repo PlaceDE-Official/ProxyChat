@@ -47,7 +47,7 @@ public class StaffChatCommand extends BaseCommand {
     if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_STAFFCHAT)) return;
 
     if (invocation.arguments().length == 0) {
-      ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+      ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
       if (player.getChannelType() == ChannelType.STAFF) {
         ChannelType defaultChannelType = player.getDefaultChannelType();

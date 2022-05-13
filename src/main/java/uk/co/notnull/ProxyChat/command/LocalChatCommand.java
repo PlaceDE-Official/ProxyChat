@@ -53,7 +53,7 @@ public class LocalChatCommand extends BaseCommand {
 
     if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_LOCAL)) return;
 
-    ProxyChatAccount account = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount account = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if (!MessagesService.getLocalPredicate().test(account)
         && (account.getAccountType() == AccountType.PLAYER)) {
@@ -63,7 +63,7 @@ public class LocalChatCommand extends BaseCommand {
 
     if (invocation.arguments().length < 1) {
       if (PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_LOCAL_TOGGLE)) {
-        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
         if (player.getChannelType() == ChannelType.LOCAL) {
           ChannelType defaultChannelType = player.getDefaultChannelType();

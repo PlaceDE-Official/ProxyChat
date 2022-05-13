@@ -64,7 +64,7 @@ public class ClearChatCommand extends BaseCommand {
 
       final int lines =
           ProxyChatModuleManager.CLEAR_CHAT_MODULE.getModuleSection().getInt("emptyLines");
-      final ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(invocation.source()).get();
+      final ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
       if (invocation.arguments()[0].equalsIgnoreCase("local")) {
         boolean serverSpecified = invocation.arguments().length == 2;

@@ -111,7 +111,7 @@ public interface ProxyChatApi {
    */
   default void sendChannelMessage(ProxyChatContext context) throws InvalidContextError {
     if (context.hasSender()) {
-      sendChannelMessage(context, context.getSender().get().getChannelType());
+      sendChannelMessage(context, context.getSender().orElseThrow().getChannelType());
     } else {
       sendChannelMessage(context, ChannelType.LOCAL);
     }

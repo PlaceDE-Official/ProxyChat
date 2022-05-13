@@ -46,8 +46,8 @@ public class PlatformUtil {
 		PluginManager pluginManager = ProxyChat.getInstance().getProxy().getPluginManager();
 
 		if(pluginManager.isLoaded("platform-detection")) {
-			platformDetection = (PlatformDetectionVelocity) pluginManager.getPlugin("platform-detection").get()
-					.getInstance().get();
+			platformDetection = (PlatformDetectionVelocity) pluginManager.getPlugin("platform-detection").orElseThrow()
+					.getInstance().orElseThrow();
 		}
 	}
 

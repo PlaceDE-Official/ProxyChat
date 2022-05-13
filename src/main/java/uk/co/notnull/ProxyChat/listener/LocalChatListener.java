@@ -58,7 +58,7 @@ public class LocalChatListener {
     if (e.getPlayer() == null) return;
 
     Player sender = e.getPlayer();
-    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).get();
+    ProxyChatAccount account = ProxyChatAccountManager.getAccount(sender).orElseThrow();
     String message = e.getMessage();
 
     if (ChatUtils.isCommand(message)) return;

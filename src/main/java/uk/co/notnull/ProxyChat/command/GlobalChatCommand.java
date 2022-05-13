@@ -48,7 +48,7 @@ public class GlobalChatCommand extends BaseCommand {
   public void execute(Invocation invocation) {
     if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_GLOBAL)) return;
 
-    ProxyChatAccount account = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount account = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if (!MessagesService.getGlobalPredicate().test(account)
         && (account.getAccountType() == AccountType.PLAYER)) {
@@ -64,7 +64,7 @@ public class GlobalChatCommand extends BaseCommand {
       }
 
       if (PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_GLOBAL_TOGGLE)) {
-        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+        ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
         if (player.getChannelType() == ChannelType.GLOBAL) {
           ChannelType defaultChannelType = player.getDefaultChannelType();

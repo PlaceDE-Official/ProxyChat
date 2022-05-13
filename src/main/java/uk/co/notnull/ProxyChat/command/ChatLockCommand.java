@@ -55,7 +55,7 @@ public class ChatLockCommand extends BaseCommand {
     // The permission check sends the no permission message
     if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_CHAT_LOCK)) return;
 
-    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if ((invocation.arguments().length < 1) || (invocation.arguments().length > 2)) {
       MessagesService.sendMessage(invocation.source(), Messages.INCORRECT_USAGE.get(player, USAGE));

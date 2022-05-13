@@ -34,7 +34,6 @@ import net.kyori.adventure.text.Component;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class AlertCommand extends BaseCommand {
   public AlertCommand(AlertModule alertModule) {
@@ -51,9 +50,10 @@ public class AlertCommand extends BaseCommand {
       } else {
         ProxyChatContext context = new Context(invocation.source(), String.join(" ", invocation.arguments()));
         MessagesService.parseMessage(context, false);
-        Optional<Component> message = MessagesService.preProcessMessage(context, Format.ALERT);
 
-        MessagesService.sendToMatchingPlayers(message, MessagesService.getGlobalPredicate());
+        MessagesService.preProcessMessage(context, Format.ALERT)
+                .ifPresent((Component message) ->
+                                   MessagesService.sendToMatchingPlayers(message, MessagesService.getGlobalPredicate()));
       }
     }
   }

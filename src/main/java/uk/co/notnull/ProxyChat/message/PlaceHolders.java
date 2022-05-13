@@ -253,8 +253,7 @@ public class PlaceHolders {
   private static String getLocalPlayerCount(ProxyChatAccount player) {
     if (player.getAccountType() == AccountType.CONSOLE) return getTotalPlayerCount();
 
-    Player nativePlayer =
-        (Player) ProxyChatAccountManager.getCommandSource(player).get();
+    Player nativePlayer = (Player) ProxyChatAccountManager.getCommandSource(player).orElseThrow();
 
     return Integer.toString(nativePlayer.getCurrentServer().get().getServer().getPlayersConnected().size());
   }

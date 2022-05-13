@@ -53,7 +53,7 @@ public class VanishCommand extends BaseCommand {
       return;
     }
 
-    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if (invocation.arguments().length > 0) {
       if (invocation.arguments()[0].equalsIgnoreCase("on")) {

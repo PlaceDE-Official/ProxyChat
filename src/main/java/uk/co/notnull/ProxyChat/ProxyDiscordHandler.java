@@ -47,7 +47,7 @@ public class ProxyDiscordHandler {
 	public ProxyDiscordHandler(ProxyChat plugin) {
 		this.plugin = plugin;
 		this.proxyDiscord = (ProxyDiscord) plugin.getProxy().getPluginManager()
-				.getPlugin("proxydiscord").get().getInstance().get();
+				.getPlugin("proxydiscord").orElseThrow().getInstance().orElseThrow();
 
 		this.proxyDiscord.setEmoteProvider((s, builder) -> {
 			if(emoteModule.isEnabled()) {

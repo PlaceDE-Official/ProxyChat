@@ -40,7 +40,7 @@ public class MOTDListener {
 
     if (!PermissionManager.hasPermission(player, Permission.MESSAGE_MOTD)) return;
 
-    ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(player).get();
+    ProxyChatAccount proxyChatAccount = ProxyChatAccountManager.getAccount(player).orElseThrow();
 
     MessagesService.sendMessage(player, Format.MOTD.get(new ProxyChatContext(proxyChatAccount)));
   }

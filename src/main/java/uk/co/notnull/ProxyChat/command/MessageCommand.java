@@ -62,7 +62,7 @@ public class MessageCommand extends BaseCommand {
         return;
       }
 
-      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).get();
+      CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).orElseThrow();
 
       if (target == invocation.source()) {
         MessagesService.sendMessage(invocation.source(), Messages.MESSAGE_YOURSELF.get());
@@ -84,7 +84,7 @@ public class MessageCommand extends BaseCommand {
 
   @Override
   public List<String> suggest(Invocation invocation) {
-    final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
 
     if(invocation.arguments().length == 0) {
       return ProxyChatAccountManager.getAccounts().stream()

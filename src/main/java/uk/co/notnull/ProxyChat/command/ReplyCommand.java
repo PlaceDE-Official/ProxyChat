@@ -81,7 +81,7 @@ public class ReplyCommand extends BaseCommand {
       return;
     }
 
-    CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).get();
+    CommandSource target = ProxyChatAccountManager.getCommandSource(targetAccount.get()).orElseThrow();
 
     if (!targetAccount.get().hasMessangerEnabled()
         && !PermissionManager.hasPermission(invocation.source(), Permission.BYPASS_TOGGLE_MESSAGE)) {

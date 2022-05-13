@@ -47,7 +47,7 @@ public class SocialSpyCommand extends BaseCommand {
       return;
     }
 
-    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).get();
+    ProxyChatAccount player = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
     player.toggleSocialSpy();
 
     if (player.hasSocialSpyEnabled()) {

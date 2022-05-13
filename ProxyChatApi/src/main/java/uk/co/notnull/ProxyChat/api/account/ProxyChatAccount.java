@@ -24,6 +24,7 @@ package uk.co.notnull.ProxyChat.api.account;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.identity.Identified;
 import net.kyori.adventure.identity.Identity;
+import org.jetbrains.annotations.NotNull;
 import uk.co.notnull.ProxyChat.api.enums.AccountType;
 import uk.co.notnull.ProxyChat.api.enums.ChannelType;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
@@ -148,5 +149,5 @@ public interface ProxyChatAccount extends Identified {
 
   boolean hasPermission(String permission);
 
-  Identity identity();
+  @NotNull Identity identity();
 }
