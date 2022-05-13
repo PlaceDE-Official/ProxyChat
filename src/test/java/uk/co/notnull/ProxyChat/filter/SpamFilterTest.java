@@ -21,8 +21,6 @@
 
 package uk.co.notnull.ProxyChat.filter;
 
-import static org.junit.Assert.assertEquals;
-
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatFilter;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.message.Messages;

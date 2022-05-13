@@ -27,7 +27,6 @@ import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.command.MuteCommand;
 import uk.co.notnull.ProxyChat.command.TempMuteCommand;
 import uk.co.notnull.ProxyChat.command.UnmuteCommand;
-import uk.co.notnull.ProxyChat.listener.MutingListener;
 
 public class MutingModule extends Module {
   private MuteCommand muteCommand;

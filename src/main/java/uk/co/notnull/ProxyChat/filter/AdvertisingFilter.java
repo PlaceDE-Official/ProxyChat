@@ -36,8 +36,8 @@ import java.util.regex.Pattern;
 
 public class AdvertisingFilter implements ProxyChatPreParseFilter {
   /**
-   * Regex from <a href=
-   * "https://gist.github.com/dperini/729294">https://gist.github.com/dperini/729294</a>. <br>
+   * Regex from
+   * <a href="https://gist.github.com/dperini/729294">https://gist.github.com/dperini/729294</a>. <br>
    * Slightly modified. Allowed dropping of the protocol. So <code>google.com</code> still matches
    * and removed the start and end anchors!
    */

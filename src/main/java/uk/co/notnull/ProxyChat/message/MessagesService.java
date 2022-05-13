@@ -375,6 +375,7 @@ public class MessagesService {
 	}
 
 	@SafeVarargs
+	@SuppressWarnings("varargs")
 	public void sendToMatchingPlayers(Component finalMessage, Predicate<ProxyChatAccount>... playerFilters) {
 		Predicate<ProxyChatAccount> playerFiler =
 				Arrays.stream(playerFilters).reduce(Predicate::and).orElse(acc -> true);
@@ -389,6 +390,7 @@ public class MessagesService {
 	}
 
 	@SafeVarargs
+	@SuppressWarnings("varargs")
 	public void sendToMatchingPlayers(Component finalMessage, Identified sender, Predicate<ProxyChatAccount>... playerFilters) {
 		Predicate<ProxyChatAccount> playerFiler =
 				Arrays.stream(playerFilters).reduce(Predicate::and).orElse(acc -> true);

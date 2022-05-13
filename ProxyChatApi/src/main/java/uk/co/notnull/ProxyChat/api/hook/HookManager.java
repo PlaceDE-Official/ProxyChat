@@ -48,12 +48,9 @@ public class HookManager {
     sortHooks();
   }
 
-  public static ProxyChatHook removeHook(String name) {
-    ProxyChatHook out = hooks.remove(name);
-
+  public static void removeHook(String name) {
+    hooks.remove(name);
     sortHooks();
-
-    return out;
   }
 
   public String getPrefix(ProxyChatAccount account) {

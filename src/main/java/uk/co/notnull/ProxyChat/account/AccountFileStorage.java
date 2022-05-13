@@ -21,8 +21,6 @@
 
 package uk.co.notnull.ProxyChat.account;
 
-import com.velocitypowered.api.proxy.Player;
-import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.api.ProxyChatApi;
 import uk.co.notnull.ProxyChat.api.account.AccountInfo;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
@@ -36,7 +34,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import lombok.Cleanup;

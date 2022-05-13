@@ -80,7 +80,6 @@ import org.slf4j.Logger;
 public class ProxyChat implements ProxyChatApi {
   private static final String storedDataHookName = "storedData";
   private static final String defaultHookName = "default";
-  private static final String errorVersion = "error";
 
   @Getter
   @Setter(AccessLevel.PRIVATE)

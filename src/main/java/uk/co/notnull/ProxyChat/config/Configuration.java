@@ -126,8 +126,7 @@ public class Configuration implements Config {
 
   private static Collection<String> getPaths(ConfigValue config) {
     if (config instanceof ConfigObject) {
-      return ((ConfigObject) config)
-          .keySet().stream().collect(Collectors.toList());
+      return new ArrayList<>(((ConfigObject) config).keySet());
     } else {
       return Collections.emptyList();
     }
@@ -198,6 +197,7 @@ public class Configuration implements Config {
     }
   }
 
+  @SuppressWarnings("fallthrough")
   private void convertOldConfig() {
     if (OLD_CONFIG_FILE.exists()) {
       convertYAMLConfig();

@@ -125,6 +125,7 @@ public class DummyPlayer implements Player {
   }
 
   @Override
+  @Deprecated
   public void clearHeaderAndFooter() {
   }
 
@@ -154,11 +155,13 @@ public class DummyPlayer implements Player {
   }
 
   @Override
+  @Deprecated
   public void sendResourcePack(String url) {
 
   }
 
   @Override
+  @Deprecated
   public void sendResourcePack(String url, byte[] hash) {
 
   }

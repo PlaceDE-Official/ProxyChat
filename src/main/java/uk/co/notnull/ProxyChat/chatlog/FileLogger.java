@@ -53,7 +53,7 @@ public class FileLogger implements ChatLogger, AutoCloseable {
   }
 
   @Override
-  public void close() throws Exception {
+  public void close() throws IOException {
     fw.close();
     pw.close();
   }

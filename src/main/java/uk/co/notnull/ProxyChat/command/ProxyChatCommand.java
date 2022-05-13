@@ -22,8 +22,6 @@
 package uk.co.notnull.ProxyChat.command;
 
 import uk.co.notnull.ProxyChat.ProxyChat;
-import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
-import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.message.Messages;
 import uk.co.notnull.ProxyChat.message.MessagesService;
 import uk.co.notnull.ProxyChat.module.ProxyChatModuleManager;

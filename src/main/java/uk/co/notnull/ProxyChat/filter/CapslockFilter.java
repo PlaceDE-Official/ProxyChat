@@ -28,7 +28,6 @@ import uk.co.notnull.ProxyChat.api.filter.ProxyChatPreParseFilter;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.message.Messages;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
-import uk.co.notnull.ProxyChat.permission.PermissionManager;
 
 public class CapslockFilter implements ProxyChatPreParseFilter {
   private final int minimumLetterCount;
