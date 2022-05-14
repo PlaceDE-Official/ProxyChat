@@ -28,12 +28,14 @@ import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatPostParseFilter;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
+import uk.co.notnull.ProxyChat.emoji.Emoji;
 import uk.co.notnull.ProxyChat.module.EmojiModule;
 
 import java.util.Locale;
 import java.util.regex.MatchResult;
 
 public class EmojiPostFilter implements ProxyChatPostParseFilter {
+	private final TextReplacementConfig nameReplacement;
 	private final TextReplacementConfig characterReplacement;
 	private final boolean noPermissions;
 
@@ -42,12 +44,23 @@ public class EmojiPostFilter implements ProxyChatPostParseFilter {
 	}
 
 	public EmojiPostFilter(EmojiModule module, boolean noPermissions) {
-		characterReplacement = TextReplacementConfig.builder()
+		//Replace custom emoji names with the emoji's component
+		nameReplacement = TextReplacementConfig.builder()
 				.match(module.getEmojiPattern())
-				.replacement((MatchResult result, TextComponent.Builder builder) -> module.getEmojiByName(
+				.replacement((MatchResult result, TextComponent.Builder builder) -> module.getEmoji(
 						result.group(1).toLowerCase(Locale.ROOT))
-						.map(EmojiModule.Emoji::getComponent)
+						.map(Emoji::getComponent)
 						.orElse(builder.build()))
+				.build();
+
+		//Replace default emoji characters with the emoji's component
+		characterReplacement = TextReplacementConfig.builder()
+				.match(module.getDefaultCharacterPattern())
+				.replacement((MatchResult result, TextComponent.Builder builder) -> {
+					return module.getEmojiByCharacter(result.group(1))
+							.map(Emoji::getComponent)
+							.orElse(builder.build());
+				})
 				.build();
 
 		this.noPermissions = noPermissions;
@@ -59,7 +72,7 @@ public class EmojiPostFilter implements ProxyChatPostParseFilter {
 			return message;
 		}
 
-		return message.replaceText(characterReplacement);
+		return message.replaceText(characterReplacement).replaceText(nameReplacement);
 	}
 
 	@Override

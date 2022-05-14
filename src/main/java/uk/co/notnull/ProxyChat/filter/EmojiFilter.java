@@ -25,6 +25,8 @@ import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatPreParseFilter;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
+import uk.co.notnull.ProxyChat.emoji.CustomEmoji;
+import uk.co.notnull.ProxyChat.emoji.Emoji;
 import uk.co.notnull.ProxyChat.module.EmojiModule;
 
 import java.util.Locale;
@@ -48,18 +50,24 @@ public class EmojiFilter implements ProxyChatPreParseFilter {
 			return message;
 		}
 
+		//Replace :emoji_names: with characters for default emoji and the primary name for custom emoji
 		message = module.getEmojiPattern().matcher(message).replaceAll(matcher -> {
 			String match = matcher.group(1).toLowerCase(Locale.ROOT);
-			return module.getEmojiByName(match).map(emoji -> ":" + emoji.getPrimaryName() + ":").orElse(matcher.group());
+			return module.getEmoji(match)
+					.map(emoji -> (emoji instanceof CustomEmoji)
+							? emoji.getPrimaryNameWithColons()
+							: emoji.getCharacter())
+					.orElse(matcher.group());
 		});
 
-		if(module.getCharacterPattern() == null) {
+		if(module.getCustomCharacterPattern() == null) {
 			return message;
 		}
 
-		return module.getCharacterPattern().matcher(message)
+		//Replace custom emoji characters with primary name
+		return module.getCustomCharacterPattern().matcher(message)
 				.replaceAll(matcher -> module.getEmojiByCharacter(matcher.group())
-						.map(emoji -> ":" + emoji.getPrimaryName() + ":")
+						.map(Emoji::getPrimaryNameWithColons)
 						.orElse(matcher.group()));
 	}
 

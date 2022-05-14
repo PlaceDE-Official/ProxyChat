@@ -28,6 +28,7 @@ import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.enums.ChannelType;
 import uk.co.notnull.ProxyChat.api.placeholder.ProxyChatContext;
+import uk.co.notnull.ProxyChat.emoji.Emoji;
 import uk.co.notnull.ProxyChat.module.EmojiModule;
 import uk.co.notnull.ProxyChat.module.ProxyChatModuleManager;
 import uk.co.notnull.proxydiscord.api.ProxyDiscord;
@@ -51,8 +52,8 @@ public class ProxyDiscordHandler {
 
 		this.proxyDiscord.setEmoteProvider((s, builder) -> {
 			if(emojiModule.isEnabled()) {
-				return emojiModule.getEmojiByName(s.toLowerCase())
-						.map(EmojiModule.Emoji::getComponent).orElse(builder.build());
+				return emojiModule.getEmoji(s.toLowerCase())
+						.map(Emoji::getComponent).orElse(builder.build());
 			} else {
 				return builder.build();
 			}
