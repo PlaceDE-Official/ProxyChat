@@ -14,4 +14,4 @@ A Velocity proxy chat solution, based on [BungeeChat](https://github.com/AuraDev
 * Socialspy for viewing private messages
 * Multicast chat for combining the local chats of multiple servers
 * Network join, leave and server switch messages
-* Resource pack based emotes
+* Resource pack based emoji

@@ -31,9 +31,9 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextDecoration;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatFilter;
-import uk.co.notnull.ProxyChat.command.EmotesCommand;
-import uk.co.notnull.ProxyChat.filter.EmoteFilter;
-import uk.co.notnull.ProxyChat.filter.EmotePostFilter;
+import uk.co.notnull.ProxyChat.command.EmojiCommand;
+import uk.co.notnull.ProxyChat.filter.EmojiFilter;
+import uk.co.notnull.ProxyChat.filter.EmojiPostFilter;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -41,51 +41,54 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
-public class EmoteModule extends Module {
+public class EmojiModule extends Module {
 	@Delegate(excludes = ProxyChatFilter.class)
 
-	private final Pattern incompleteEmotePattern = Pattern.compile("(.*):(\\w+)$");
-	private final Pattern emotePattern = Pattern.compile(":(\\w+):");
+	private final Pattern incompleteEmojiPattern = Pattern.compile("(.*):(\\w+)$");
+	private final Pattern emojiPattern = Pattern.compile(":(\\w+):");
+
 	private Pattern characterPattern;
 
-	private final EmoteFilter emoteFilter = new EmoteFilter(this);
-	private final EmotePostFilter emotePostFilter = new EmotePostFilter(this);
+	private final EmojiFilter emojiFilter = new EmojiFilter(this);
+	private final EmojiPostFilter emojiPostFilter = new EmojiPostFilter(this);
 
-	private TreeMap<String, Emote> emotesByName;
-	private Map<String, Emote> emotesByCharacter;
-	private Map<String, List<Emote>> emotesByCategory;
-	private Component emotesList;
+	private TreeMap<String, Emoji> emojiByName;
+	private Map<String, Emoji> emojiByCharacter;
+	private Map<String, List<Emoji>> customEmojiByCategory;
+	private Component emojiList;
 
-	private EmotesCommand emotesCommand;
+	private EmojiCommand emojiCommand;
 
 	@Override
 	public String getName() {
-		return "Emotes";
+		return "Emoji";
 	}
 
 	@Override
 	public void onEnable() {
-		emotesByName = new TreeMap<>();
-		emotesByCharacter = new HashMap<>();
-		emotesByCategory = new HashMap<>();
+		emojiByName = new TreeMap<>();
+		emojiByCharacter = new HashMap<>();
+		customEmojiByCategory = new HashMap<>();
 
 		parseConfig();
 
-		emotesCommand = new EmotesCommand(this);
+		emojiCommand = new EmojiCommand(this);
 
-		FilterManager.addPreParseFilter(getName(), emoteFilter);
-		FilterManager.addPostParseFilter(getName(), emotePostFilter);
+		FilterManager.addPreParseFilter(getName(), emojiFilter);
+		FilterManager.addPostParseFilter(getName(), emojiPostFilter);
 
-		emotesCommand.register();
+		emojiCommand.register();
+
+
 	}
 
 	@Override
 	public void onDisable() {
-		emotesByName.clear();
-		emotesByCharacter.clear();
-		emotesByCategory.clear();
-		emotesCommand.unregister();
-		emotesList = null;
+		emojiByName.clear();
+		emojiByCharacter.clear();
+		customEmojiByCategory.clear();
+		emojiCommand.unregister();
+		emojiList = null;
 
 		FilterManager.removePreParseFilter(getName());
 		FilterManager.removePostParseFilter(getName());
@@ -93,23 +96,23 @@ public class EmoteModule extends Module {
 
 	public void parseConfig() {
 		Map<String, Map<String, List<String>>> categories = (Map<String, Map<String, List<String>>>) getModuleSection()
-				.getAnyRef("emotes");
+				.getAnyRef("emoji");
 
 		StringBuilder characterRegex = new StringBuilder("[");
 
-		categories.forEach((String category, Map<String, List<String>> emotes) -> {
-			ArrayList<Emote> categoryEmotes = new ArrayList<>();
+		categories.forEach((String category, Map<String, List<String>> emoji) -> {
+			ArrayList<Emoji> categoryEmojis = new ArrayList<>();
 
-			emotes.forEach((String character, List<String> names) -> {
+			emoji.forEach((String character, List<String> names) -> {
 				characterRegex.append(character);
-				Emote emote = new Emote(character, names, category);
+				Emoji e = new Emoji(character, names, category);
 
-				names.forEach(name -> this.emotesByName.put(name.toLowerCase(), emote));
-				emotesByCharacter.put(character, emote);
-				categoryEmotes.add(emote);
+				names.forEach(name -> this.emojiByName.put(name.toLowerCase(), e));
+				emojiByCharacter.put(character, e);
+				categoryEmojis.add(e);
 			});
 
-			emotesByCategory.put(category, categoryEmotes);
+			customEmojiByCategory.put(category, categoryEmojis);
 		});
 
 		characterRegex.append("]");
@@ -119,9 +122,9 @@ public class EmoteModule extends Module {
 		}
 	}
 
-	public List<String> getEmoteSuggestions(SimpleCommand.Invocation invocation) {
+	public List<String> getEmojiSuggestions(SimpleCommand.Invocation invocation) {
 		String lastWord = invocation.arguments()[invocation.arguments().length - 1].toLowerCase();
-		Matcher matcher = incompleteEmotePattern.matcher(lastWord);
+		Matcher matcher = incompleteEmojiPattern.matcher(lastWord);
 
 		if(!matcher.find()) {
 		  	return Collections.emptyList();
@@ -129,32 +132,32 @@ public class EmoteModule extends Module {
 
 		String prefix = matcher.group(1);
 
-		return searchEmotes(matcher.group(2))
+		return searchEmoji(matcher.group(2))
 				.stream()
-				.map(emote -> prefix + emote.getCharacter())
+				.map(emoji -> prefix + emoji.getCharacter())
 				.collect(Collectors.toList());
 	}
 
-	public List<Emote> searchEmotes(String search) {
-		Map<String, Emote> results = emotesByName.subMap(search, search + Character.MAX_VALUE);
+	public List<Emoji> searchEmoji(String search) {
+		Map<String, Emoji> results = emojiByName.subMap(search, search + Character.MAX_VALUE);
 
 		return results.values().stream().distinct().collect(Collectors.toList());
 	}
 
-	public Component getEmotesListComponent() {
-		if(emotesList != null) {
-			return emotesList;
+	public Component getEmojiListComponent() {
+		if(emojiList != null) {
+			return emojiList;
 		}
 
 		TextComponent.Builder list = Component.text().append(
-				Component.text().content("Available Emotes")
+				Component.text().content("Available Emoji")
 						.color(NamedTextColor.YELLOW)
 						.decoration(TextDecoration.UNDERLINED, TextDecoration.State.TRUE)
 						.decoration(TextDecoration.BOLD, TextDecoration.State.TRUE))
 				.append(Component.newline());
 
-		emotesByCategory.forEach((String category, List<Emote> emotes) -> {
-			if(emotes.isEmpty()) {
+		customEmojiByCategory.forEach((String category, List<Emoji> emojis) -> {
+			if(emojis.isEmpty()) {
 				return;
 			}
 
@@ -162,47 +165,47 @@ public class EmoteModule extends Module {
 			list.append(Component.newline());
 			list.append(Component.space());
 
-			emotes.forEach(emote -> list.append(emote.getComponent()).append(Component.space()));
+			emojis.forEach(emoji -> list.append(emoji.getComponent()).append(Component.space()));
 			list.append(Component.newline());
 		});
 
-		emotesList = list.build();
+		emojiList = list.build();
 
-		return emotesList;
+		return emojiList;
 	}
 
-	public Pattern getEmotePattern() {
-		return emotePattern;
+	public Pattern getEmojiPattern() {
+		return emojiPattern;
 	}
 
 	public Pattern getCharacterPattern() {
 		return characterPattern;
 	}
 
-	public Optional<Emote> getEmoteByName(String name) {
-		return Optional.ofNullable(emotesByName.get(name));
+	public Optional<Emoji> getEmojiByName(String name) {
+		return Optional.ofNullable(emojiByName.get(name));
 	}
 
-	public Optional<Emote> getEmoteByCharacter(String character) {
-		return Optional.ofNullable(emotesByCharacter.get(character));
+	public Optional<Emoji> getEmojiByCharacter(String character) {
+		return Optional.ofNullable(emojiByCharacter.get(character));
 	}
 
-	public EmoteFilter getEmoteFilter() {
-		return emoteFilter;
+	public EmojiFilter getEmojiFilter() {
+		return emojiFilter;
 	}
 
-	public EmotePostFilter getEmotePostFilter() {
-		return emotePostFilter;
+	public EmojiPostFilter getEmojiPostFilter() {
+		return emojiPostFilter;
 	}
 
 	@SuppressWarnings("unused")
-	public static class Emote {
+	public static class Emoji {
 		private final List<String> names;
 		private final String category;
 		private final String character;
 		private Component component;
 
-		Emote(String character, List<String> names, String category) {
+		Emoji(String character, List<String> names, String category) {
 			this.character = character;
 			this.names = names;
 			this.category = category;

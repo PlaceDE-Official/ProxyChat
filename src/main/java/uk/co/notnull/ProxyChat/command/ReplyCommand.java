@@ -101,6 +101,6 @@ public class ReplyCommand extends BaseCommand {
       return Collections.emptyList();
     }
 
-    return ProxyChatModuleManager.EMOTE_MODULE.getEmoteSuggestions(invocation);
+    return ProxyChatModuleManager.EMOJI_MODULE.getEmojiSuggestions(invocation);
   }
 }

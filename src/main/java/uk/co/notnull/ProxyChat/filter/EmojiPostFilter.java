@@ -28,25 +28,25 @@ import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatPostParseFilter;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
-import uk.co.notnull.ProxyChat.module.EmoteModule;
+import uk.co.notnull.ProxyChat.module.EmojiModule;
 
 import java.util.Locale;
 import java.util.regex.MatchResult;
 
-public class EmotePostFilter implements ProxyChatPostParseFilter {
+public class EmojiPostFilter implements ProxyChatPostParseFilter {
 	private final TextReplacementConfig characterReplacement;
 	private final boolean noPermissions;
 
-	public EmotePostFilter(EmoteModule module) {
+	public EmojiPostFilter(EmojiModule module) {
 		this(module, false);
 	}
 
-	public EmotePostFilter(EmoteModule module, boolean noPermissions) {
+	public EmojiPostFilter(EmojiModule module, boolean noPermissions) {
 		characterReplacement = TextReplacementConfig.builder()
-				.match(module.getEmotePattern())
-				.replacement((MatchResult result, TextComponent.Builder builder) -> module.getEmoteByName(
+				.match(module.getEmojiPattern())
+				.replacement((MatchResult result, TextComponent.Builder builder) -> module.getEmojiByName(
 						result.group(1).toLowerCase(Locale.ROOT))
-						.map(EmoteModule.Emote::getComponent)
+						.map(EmojiModule.Emoji::getComponent)
 						.orElse(builder.build()))
 				.build();
 
@@ -55,7 +55,7 @@ public class EmotePostFilter implements ProxyChatPostParseFilter {
 
 	@Override
 	public Component applyFilter(ProxyChatAccount sender, Component message) {
-		if(!noPermissions && sender.hasPermission(Permission.USE_EMOTES)) {
+		if(!noPermissions && sender.hasPermission(Permission.USE_EMOJI)) {
 			return message;
 		}
 
@@ -64,6 +64,6 @@ public class EmotePostFilter implements ProxyChatPostParseFilter {
 
 	@Override
 	public int getPriority() {
-		return FilterManager.EMOTE_FILTER_PRIORITY;
+		return FilterManager.EMOJI_FILTER_PRIORITY;
 	}
 }

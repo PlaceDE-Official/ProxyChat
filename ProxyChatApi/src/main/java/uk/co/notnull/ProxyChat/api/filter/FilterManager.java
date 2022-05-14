@@ -38,7 +38,7 @@ public class FilterManager {
   public static final int DUPLICATION_FILTER_PRIORITY = 400;
   public static final int SPAM_FILTER_PRIORITY = 500;
   public static final int LOCK_CHAT_FILTER_PRIORITY = 600;
-  public static final int EMOTE_FILTER_PRIORITY = 700;
+  public static final int EMOJI_FILTER_PRIORITY = 700;
 
   private static Map<String, ProxyChatPreParseFilter> preParsefilters = new LinkedHashMap<>();
   private static Map<String, ProxyChatPostParseFilter> postParsefilters = new LinkedHashMap<>();

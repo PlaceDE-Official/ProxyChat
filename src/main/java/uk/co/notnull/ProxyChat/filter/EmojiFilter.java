@@ -25,32 +25,32 @@ import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.filter.FilterManager;
 import uk.co.notnull.ProxyChat.api.filter.ProxyChatPreParseFilter;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
-import uk.co.notnull.ProxyChat.module.EmoteModule;
+import uk.co.notnull.ProxyChat.module.EmojiModule;
 
 import java.util.Locale;
 
-public class EmoteFilter implements ProxyChatPreParseFilter {
-	private final EmoteModule module;
+public class EmojiFilter implements ProxyChatPreParseFilter {
+	private final EmojiModule module;
 	private final boolean noPermissions;
 
-	public EmoteFilter(EmoteModule module) {
+	public EmojiFilter(EmojiModule module) {
 		this(module, false);
 	}
 
-	public EmoteFilter(EmoteModule module, boolean noPermissions) {
+	public EmojiFilter(EmojiModule module, boolean noPermissions) {
 		this.module = module;
 		this.noPermissions = noPermissions;
 	}
 
 	@Override
 	public String applyFilter(ProxyChatAccount sender, String message) {
-		if(!noPermissions && sender.hasPermission(Permission.USE_EMOTES)) {
+		if(!noPermissions && sender.hasPermission(Permission.USE_EMOJI)) {
 			return message;
 		}
 
-		message = module.getEmotePattern().matcher(message).replaceAll(matcher -> {
+		message = module.getEmojiPattern().matcher(message).replaceAll(matcher -> {
 			String match = matcher.group(1).toLowerCase(Locale.ROOT);
-			return module.getEmoteByName(match).map(emote -> ":" + emote.getPrimaryName() + ":").orElse(matcher.group());
+			return module.getEmojiByName(match).map(emoji -> ":" + emoji.getPrimaryName() + ":").orElse(matcher.group());
 		});
 
 		if(module.getCharacterPattern() == null) {
@@ -58,13 +58,13 @@ public class EmoteFilter implements ProxyChatPreParseFilter {
 		}
 
 		return module.getCharacterPattern().matcher(message)
-				.replaceAll(matcher -> module.getEmoteByCharacter(matcher.group())
-						.map(emote -> ":" + emote.getPrimaryName() + ":")
+				.replaceAll(matcher -> module.getEmojiByCharacter(matcher.group())
+						.map(emoji -> ":" + emoji.getPrimaryName() + ":")
 						.orElse(matcher.group()));
 	}
 
 	@Override
 	public int getPriority() {
-		return FilterManager.EMOTE_FILTER_PRIORITY;
+		return FilterManager.EMOJI_FILTER_PRIORITY;
 	}
 }

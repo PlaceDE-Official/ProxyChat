@@ -349,6 +349,14 @@ public class Configuration implements Config {
                 .withoutPath("Modules.AutoBroadcast.broadcasts")
                 .withValue("Modules.AutoBroadcast.broadcasts", ConfigValueFactory.fromIterable(broadcasts));
 
+      case "11.9":
+        LoggerHelper.info("Performing config migration 11.9 -> 12.0...");
+
+        config = config.withoutPath("Modules.Emotes")
+                .withValue("Modules.Emoji.enabled", config.getValue("Modules.Emotes.enabled"))
+                .withValue("Modules.Emoji.custom-emoji", config.getValue("Modules.Emotes.emotes"));
+
+
       default:
         // Unknow Version or old version
         // -> Update version
@@ -356,9 +364,10 @@ public class Configuration implements Config {
             config.withValue(
                 "Version", ConfigValueFactory.fromAnyRef(ProxyChatApi.CONFIG_VERSION));
 
-      case "11.9":
+      case "12.0":
         // Up to date
         // -> No action needed
+
     }
   }
 

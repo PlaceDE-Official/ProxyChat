@@ -100,6 +100,6 @@ public class MessageCommand extends BaseCommand {
           .collect(Collectors.toList());
     }
 
-    return ProxyChatModuleManager.EMOTE_MODULE.getEmoteSuggestions(invocation);
+    return ProxyChatModuleManager.EMOJI_MODULE.getEmojiSuggestions(invocation);
   }
 }

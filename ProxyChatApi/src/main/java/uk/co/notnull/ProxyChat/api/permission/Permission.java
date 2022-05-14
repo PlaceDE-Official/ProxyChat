@@ -57,7 +57,7 @@ public enum Permission {
   USE_CHAT_FORMAT_ITALIC("chat.format.italic"),
   USE_CHAT_FORMAT_RESET("chat.format.reset"),
 
-  USE_EMOTES("chat.emote"),
+  USE_EMOJI("chat.emoji"),
 
   BYPASS_ANTI_ADVERTISEMENT("chat.bypass.antiadvertisement"),
   BYPASS_ANTI_CAPSLOCK("chat.bypass.anticapslock"),
@@ -91,7 +91,7 @@ public enum Permission {
   COMMAND_CHAT_LOCK("command.chatlock"),
   COMMAND_CLEAR_CHAT("command.clearchat"),
   COMMAND_LOCALTO("command.localto"),
-  COMMAND_EMOTES("command.emotes"),
+  COMMAND_EMOJI("command.emoji"),
 
   MESSAGE_JOIN("message.join"),
   MESSAGE_JOIN_VIEW("message.join.view"),

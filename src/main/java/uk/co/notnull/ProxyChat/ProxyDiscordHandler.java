@@ -28,7 +28,7 @@ import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
 import uk.co.notnull.ProxyChat.api.enums.ChannelType;
 import uk.co.notnull.ProxyChat.api.placeholder.ProxyChatContext;
-import uk.co.notnull.ProxyChat.module.EmoteModule;
+import uk.co.notnull.ProxyChat.module.EmojiModule;
 import uk.co.notnull.ProxyChat.module.ProxyChatModuleManager;
 import uk.co.notnull.proxydiscord.api.ProxyDiscord;
 import uk.co.notnull.proxydiscord.api.events.DiscordChatEvent;
@@ -42,7 +42,7 @@ import java.util.Optional;
 public class ProxyDiscordHandler {
 	private final ProxyChat plugin;
 	private final ProxyDiscord proxyDiscord;
-	private final EmoteModule emoteModule = ProxyChatModuleManager.EMOTE_MODULE;
+	private final EmojiModule emojiModule = ProxyChatModuleManager.EMOJI_MODULE;
 
 	public ProxyDiscordHandler(ProxyChat plugin) {
 		this.plugin = plugin;
@@ -50,9 +50,9 @@ public class ProxyDiscordHandler {
 				.getPlugin("proxydiscord").orElseThrow().getInstance().orElseThrow();
 
 		this.proxyDiscord.setEmoteProvider((s, builder) -> {
-			if(emoteModule.isEnabled()) {
-				return emoteModule.getEmoteByName(s.toLowerCase())
-						.map(EmoteModule.Emote::getComponent).orElse(builder.build());
+			if(emojiModule.isEnabled()) {
+				return emojiModule.getEmojiByName(s.toLowerCase())
+						.map(EmojiModule.Emoji::getComponent).orElse(builder.build());
 			} else {
 				return builder.build();
 			}
@@ -119,8 +119,8 @@ public class ProxyDiscordHandler {
 				//TODO: All servers
 			}
 
-			if(emoteModule.isEnabled()) {
-				unfiltered = emoteModule.getEmoteFilter().applyFilter(context.getSender().get(), unfiltered);
+			if(emojiModule.isEnabled()) {
+				unfiltered = emojiModule.getEmojiFilter().applyFilter(context.getSender().get(), unfiltered);
 			}
 
 			LogEntry privateEntry = LogEntry.builder(entry).visibility(LogVisibility.PRIVATE_ONLY)

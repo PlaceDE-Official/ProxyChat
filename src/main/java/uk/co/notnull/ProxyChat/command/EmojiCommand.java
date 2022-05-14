@@ -22,7 +22,7 @@
 package uk.co.notnull.ProxyChat.command;
 
 import net.kyori.adventure.identity.Identity;
-import uk.co.notnull.ProxyChat.module.EmoteModule;
+import uk.co.notnull.ProxyChat.module.EmojiModule;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
 import uk.co.notnull.ProxyChat.permission.PermissionManager;
 import uk.co.notnull.ProxyChat.util.ServerNameUtil;
@@ -30,19 +30,19 @@ import uk.co.notnull.ProxyChat.util.ServerNameUtil;
 import java.util.Collections;
 import java.util.List;
 
-public class EmotesCommand extends BaseCommand {
-  private final EmoteModule emoteModule;
+public class EmojiCommand extends BaseCommand {
+  private final EmojiModule emojiModule;
 
-  public EmotesCommand(EmoteModule emoteModule) {
-    super("emotes", Permission.COMMAND_EMOTES, Collections.emptyList());
-    this.emoteModule = emoteModule;
+  public EmojiCommand(EmojiModule emojiModule) {
+    super("emoji", Permission.COMMAND_EMOJI, Collections.singletonList("emotes"));
+    this.emojiModule = emojiModule;
   }
 
   @Override
   public void execute(Invocation invocation) {
-    if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_EMOTES)) return;
+    if (!PermissionManager.hasPermission(invocation.source(), Permission.COMMAND_EMOJI)) return;
 
-    invocation.source().sendMessage(Identity.nil(), emoteModule.getEmotesListComponent());
+    invocation.source().sendMessage(Identity.nil(), emojiModule.getEmojiListComponent());
   }
 
   @Override
