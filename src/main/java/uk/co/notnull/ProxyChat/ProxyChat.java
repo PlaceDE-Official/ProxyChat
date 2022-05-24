@@ -27,8 +27,6 @@ import com.typesafe.config.Config;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyReloadEvent;
-import com.velocitypowered.api.plugin.Dependency;
-import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.PluginDescription;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
@@ -72,11 +70,6 @@ import lombok.Setter;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
 
-@Plugin(id = "proxychat", name = "ProxyChat", version = "0.1-SNAPSHOT",
-        authors = {"Jim (NotKatuen)", "BrainStone", "shawn_ian"}, dependencies = {
-  @Dependency(id = "luckperms", optional = true),
-  @Dependency(id = "platform-detection", optional = true)
-})
 public class ProxyChat implements ProxyChatApi {
   private static final String storedDataHookName = "storedData";
   private static final String defaultHookName = "default";

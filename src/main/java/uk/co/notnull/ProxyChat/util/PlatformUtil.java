@@ -58,12 +58,7 @@ public class PlatformUtil {
 
 	public String getPlatformIcon(ProxyChatAccount player) {
 		getPlatformAPI();
-
-		if(platformDetection == null) {
-			return "";
-		}
-
-		return getPlatform(player).getIcon();
+		return platformDetection != null ? getPlatform(player).getIcon() : "";
 	}
 
 	public static String getPlatformName(ProxyChatAccount player) {
@@ -73,11 +68,7 @@ public class PlatformUtil {
 			return "Velocity";
 		}
 
-		if(platformDetection == null) {
-			return "Unknown";
-		}
-
-		return getPlatform(player).getLabel();
+		return platformDetection != null ? getPlatform(player).getLabel() : "Unknown";
 	}
 
 	public static String getPlatformVersion(ProxyChatAccount player) {
@@ -87,16 +78,10 @@ public class PlatformUtil {
 			return ProxyChat.getInstance().getProxy().getVersion().getVersion();
 		}
 
-		if(platformDetection == null) {
-			return "Unknown";
-		}
-
-		return platformDetection.getPlatformVersion(player.getUniqueId());
+		return platformDetection != null ? platformDetection.getPlatformVersion(player.getUniqueId()) : "Unknown";
 	}
 
 	public static TextComponent getHover(ProxyChatAccount player) {
-		getPlatformAPI();
-
 		TextComponent.Builder result = Component.text().content(player.getDisplayName() + " is using:\n");
 		String version = getPlatformVersion(player);
 

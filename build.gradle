@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'java'
@@ -34,22 +36,27 @@ if (file("./build.gradle.local").exists()) {
 }
 
 allprojects {
-    group = 'uk.co.notnull'
-    version = '1.0-SNAPSHOT'
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
     repositories {
         mavenLocal()
         mavenCentral()
-
         maven { url "https://papermc.io/repo/repository/maven-public/" }
         maven { url 'https://repo.not-null.co.uk/releases/' }
         maven { url 'https://repo.lucko.me/' }
         maven { url 'https://jitpack.io' }
-
         flatDir {
             dirs 'libs'
         }
     }
+
+    group = 'uk.co.notnull'
+    version = '1.1-SNAPSHOT'
+    description = 'Velocity Discord integration solution'
+
+    java.sourceCompatibility = JavaVersion.VERSION_11
+    java.targetCompatibility = JavaVersion.VERSION_11
 
     compileJava {
         options.compilerArgs += ["-Xlint:all", "-Xlint:-processing"]
@@ -92,6 +99,19 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
 
 tasks {
+    processResources {
+        from("${project.rootDir}/src/main/resources") {
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            project.properties.findAll().each {
+                prop ->
+                    if (prop.value != null && prop.value instanceof java.lang.String) {
+                        filter(ReplaceTokens, tokens: [(prop.key): prop.value])
+                        filter(ReplaceTokens, tokens: [('project.' + prop.key): prop.value])
+                    }
+            }
+        }
+    }
+
     build {
         dependsOn(shadowJar)
     }

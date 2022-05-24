@@ -1,0 +1,21 @@
+{
+  "id": "proxychat",
+  "name": "ProxyChat",
+  "version": "@project.version@",
+  "authors": ["Jim (NotKatuen)", "BrainStone", "shawn_ian"],
+  "dependencies": [
+    {
+      "id": "luckperms",
+      "optional": true
+    },
+    {
+      "id": "platform-detection",
+      "optional": true
+    },
+    {
+      "id": "proxydiscord",
+      "optional": true
+    }
+  ],
+  "main": "uk.co.notnull.ProxyChat.ProxyChat"
+}
