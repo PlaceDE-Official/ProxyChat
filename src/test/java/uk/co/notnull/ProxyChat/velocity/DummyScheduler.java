@@ -23,10 +23,14 @@ package uk.co.notnull.ProxyChat.velocity;
 
 import com.velocitypowered.api.scheduler.ScheduledTask;
 import com.velocitypowered.api.scheduler.Scheduler;
+import org.jetbrains.annotations.NotNull;
 import org.mockito.Mockito;
 
 import java.time.Duration;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class DummyScheduler implements Scheduler {
 	@Override
@@ -41,5 +45,15 @@ public class DummyScheduler implements Scheduler {
 		Mockito.when(mock.schedule()).thenReturn(Mockito.mock(ScheduledTask.class));
 
 		return mock;
+	}
+
+	@Override
+	public TaskBuilder buildTask(@NotNull Object plugin, @NotNull Consumer<ScheduledTask> consumer) {
+		return null;
+	}
+
+	@Override
+	public @NotNull Collection<ScheduledTask> tasksByPlugin(@NotNull Object plugin) {
+		return Collections.emptyList();
 	}
 }

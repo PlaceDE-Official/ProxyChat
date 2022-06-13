@@ -25,6 +25,7 @@ import com.typesafe.config.Config;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
+import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identified;
 import net.kyori.adventure.identity.Identity;
 import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
@@ -477,12 +478,12 @@ public class MessagesService {
 	public void sendMessage(CommandSource recipient, Component message) {
 		if ((message == null)) return;
 
-		recipient.sendMessage(Identity.nil(), message);
+		recipient.sendMessage(message, MessageType.SYSTEM);
 	}
 
 	public void sendMessage(CommandSource recipient, Identified sender, Component message) {
 		if ((message == null)) return;
 
-		recipient.sendMessage(sender, message);
+		recipient.sendMessage(sender, message, MessageType.SYSTEM);
 	}
 }
