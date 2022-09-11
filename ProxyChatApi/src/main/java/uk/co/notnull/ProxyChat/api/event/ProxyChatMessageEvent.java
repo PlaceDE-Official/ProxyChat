@@ -19,28 +19,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package uk.co.notnull.ProxyChat.event;
+package uk.co.notnull.ProxyChat.api.event;
 
-import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
+import uk.co.notnull.ProxyChat.api.placeholder.ProxyChatContext;
 
-/**
- * Called when a player has changed servers.
- *
- * <p>Used by ProxyChat internally to make sure people joining while they are online don't cause
- * issues.
- */
-@Data
-@RequiredArgsConstructor
-@ToString()
-@EqualsAndHashCode()
-public class ProxyChatServerSwitchEvent {
-  /** Player whom the server is for. */
-  private final Player player;
-  /** Server the player is switch from. */
-  private final RegisteredServer from;
+public class ProxyChatMessageEvent {
+	private final ProxyChatContext context;
+
+	public ProxyChatMessageEvent(ProxyChatContext context) {
+		this.context = context;
+	}
+
+	public ProxyChatContext getContext() {
+		return context;
+	}
+
+	public String getChannel() {
+		return context.getChannel().orElse(null);
+	}
+
+	public ProxyChatAccount getSender() {
+		return context.getSender().get();
+	}
+
+	public ProxyChatAccount getRecipient() {
+		return context.getSender().get();
+	}
 }

@@ -19,16 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package uk.co.notnull.ProxyChat.event;
+package uk.co.notnull.ProxyChat.api.event;
 
 import com.velocitypowered.api.proxy.Player;
+import lombok.ToString;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
- * Event called as soon as a connection has a {@link Player} and is ready to be connected to
- * a server.
+ * Called when a player has left the proxy, it is not safe to call any methods that perform an
+ * action on the passed player instance.
  *
  * <p>Used by ProxyChat internally to make sure people joining while they are online don't cause
  * issues.
@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @ToString()
 @EqualsAndHashCode()
-public class ProxyChatJoinEvent {
-  /** The player involved with this event. */
+public class ProxyChatLeaveEvent {
+  /** Player disconnecting. */
   private final Player player;
 }

@@ -28,9 +28,9 @@ import com.velocitypowered.api.event.player.PlayerChooseInitialServerEvent;
 import com.velocitypowered.api.event.player.ServerPostConnectEvent;
 import com.velocitypowered.api.proxy.Player;
 import uk.co.notnull.ProxyChat.ProxyChat;
-import uk.co.notnull.ProxyChat.event.ProxyChatJoinEvent;
-import uk.co.notnull.ProxyChat.event.ProxyChatLeaveEvent;
-import uk.co.notnull.ProxyChat.event.ProxyChatServerSwitchEvent;
+import uk.co.notnull.ProxyChat.api.event.ProxyChatJoinEvent;
+import uk.co.notnull.ProxyChat.api.event.ProxyChatLeaveEvent;
+import uk.co.notnull.ProxyChat.api.event.ProxyChatServerSwitchEvent;
 
 public class ProxyChatEventsListener {
   @Subscribe(order = PostOrder.EARLY)

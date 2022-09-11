@@ -45,8 +45,8 @@ import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.api.account.AccountInfo;
 import uk.co.notnull.ProxyChat.api.account.AccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
-import uk.co.notnull.ProxyChat.event.ProxyChatJoinEvent;
-import uk.co.notnull.ProxyChat.event.ProxyChatLeaveEvent;
+import uk.co.notnull.ProxyChat.api.event.ProxyChatJoinEvent;
+import uk.co.notnull.ProxyChat.api.event.ProxyChatLeaveEvent;
 
 import java.net.InetSocketAddress;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
