@@ -92,6 +92,7 @@ public class ProxyChat implements ProxyChatApi {
   private ProxyChatEventsListener proxyChatEventsListener;
   private MutingListener mutingListener;
   private ProxyDiscordHandler proxyDiscordHandler;
+  private SuperVanishBridgeHandler superVanishBridgeHandler;
 
   @Inject
   public ProxyChat(ProxyServer proxy, Logger logger) {
@@ -116,6 +117,10 @@ public class ProxyChat implements ProxyChatApi {
 
     if(proxy.getPluginManager().isLoaded("proxydiscord")) {
       proxyDiscordHandler = new ProxyDiscordHandler(this);
+    }
+    
+    if(proxy.getPluginManager().isLoaded("supervanishbridge")) {
+      superVanishBridgeHandler = new SuperVanishBridgeHandler(this);
     }
 
     onEnable(true);
