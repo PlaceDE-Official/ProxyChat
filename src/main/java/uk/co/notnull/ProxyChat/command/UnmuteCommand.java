@@ -24,7 +24,6 @@ package uk.co.notnull.ProxyChat.command;
 import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
 import uk.co.notnull.ProxyChat.api.account.AccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
-import uk.co.notnull.ProxyChat.api.enums.AccountType;
 import uk.co.notnull.ProxyChat.message.Messages;
 import uk.co.notnull.ProxyChat.message.MessagesService;
 import uk.co.notnull.ProxyChat.module.MutingModule;
@@ -33,7 +32,6 @@ import uk.co.notnull.ProxyChat.permission.PermissionManager;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class UnmuteCommand extends BaseCommand {
   public UnmuteCommand(MutingModule mutingModule) {
@@ -70,17 +68,11 @@ public class UnmuteCommand extends BaseCommand {
   @Override
   public List<String> suggest(Invocation invocation) {
     if(invocation.arguments().length == 0) {
-      return ProxyChatAccountManager.getAccounts().stream()
-          .filter(account -> account.getAccountType() == AccountType.PLAYER)
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName("", invocation.source());
     }
 
     if (invocation.arguments().length == 1) {
-      return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[0], invocation.source()).stream()
-          .filter(account -> account.getAccountType() == AccountType.PLAYER)
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName(invocation.arguments()[0], invocation.source());
     }
 
     return super.suggest(invocation);

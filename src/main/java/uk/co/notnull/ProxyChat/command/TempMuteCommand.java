@@ -24,7 +24,6 @@ package uk.co.notnull.ProxyChat.command;
 import uk.co.notnull.ProxyChat.account.ProxyChatAccountManager;
 import uk.co.notnull.ProxyChat.api.account.AccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
-import uk.co.notnull.ProxyChat.api.enums.AccountType;
 import uk.co.notnull.ProxyChat.api.utils.TimeUtil;
 import uk.co.notnull.ProxyChat.message.Messages;
 import uk.co.notnull.ProxyChat.message.MessagesService;
@@ -83,17 +82,11 @@ public class TempMuteCommand extends BaseCommand {
   @Override
   public List<String> suggest(Invocation invocation) {
     if(invocation.arguments().length == 0) {
-      return ProxyChatAccountManager.getAccounts().stream()
-          .filter(account -> account.getAccountType() == AccountType.PLAYER)
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName("", invocation.source());
     }
 
     if (invocation.arguments().length == 1) {
-      return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[0], invocation.source()).stream()
-          .filter(account -> account.getAccountType() == AccountType.PLAYER)
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName(invocation.arguments()[0], invocation.source());
     } else if (invocation.arguments().length == 2) {
       final String time = invocation.arguments()[1];
       String digits = null;

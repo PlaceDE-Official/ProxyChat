@@ -91,13 +91,7 @@ public class MessageToggleCommand extends BaseCommand {
   @Override
   public List<String> suggest(Invocation invocation) {
     if (invocation.arguments().length == 1) {
-      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
-
-      return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[0], invocation.source()).stream()
-          .filter(account -> account.getAccountType() == AccountType.PLAYER)
-          .filter(account -> !senderAccount.equals(account))
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName(invocation.arguments()[0], invocation.source());
     }
 
     return super.suggest(invocation);

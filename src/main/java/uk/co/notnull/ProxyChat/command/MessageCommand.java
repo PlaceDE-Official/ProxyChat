@@ -84,20 +84,12 @@ public class MessageCommand extends BaseCommand {
 
   @Override
   public List<String> suggest(Invocation invocation) {
-    final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
-
     if(invocation.arguments().length == 0) {
-      return ProxyChatAccountManager.getAccounts().stream()
-          .filter(account -> !senderAccount.equals(account))
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName("", invocation.source());
     }
 
     if (invocation.arguments().length == 1) {
-      return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[0], invocation.source()).stream()
-          .filter(account -> !senderAccount.equals(account))
-          .map(ProxyChatAccount::getName)
-          .collect(Collectors.toList());
+      return ProxyChatAccountManager.getUsernamesForPartialName(invocation.arguments()[0], invocation.source());
     }
 
     return ProxyChatModuleManager.EMOJI_MODULE.getEmojiSuggestions(invocation);

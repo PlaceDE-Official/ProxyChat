@@ -165,12 +165,7 @@ public class IgnoreCommand extends BaseCommand {
     }
 
     if(invocation.arguments().length == 2 && ("add".equals(param1) || "remove".equals(param1))) {
-      final ProxyChatAccount senderAccount = ProxyChatAccountManager.getAccount(invocation.source()).orElseThrow();
-
-        return ProxyChatAccountManager.getAccountsForPartialName(invocation.arguments()[1], invocation.source()).stream()
-                .filter(account -> !senderAccount.equals(account))
-                .map(ProxyChatAccount::getName)
-                .collect(Collectors.toList());
+        return ProxyChatAccountManager.getUsernamesForPartialName(invocation.arguments()[1], invocation.source());
     }
 
     return super.suggest(invocation);

@@ -24,40 +24,25 @@ package uk.co.notnull.ProxyChat.account;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
-import com.velocitypowered.api.network.ProtocolVersion;
-import com.velocitypowered.api.permission.Tristate;
-import com.velocitypowered.api.proxy.ConnectionRequestBuilder;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
-import com.velocitypowered.api.proxy.ServerConnection;
-import com.velocitypowered.api.proxy.messages.ChannelIdentifier;
-import com.velocitypowered.api.proxy.player.PlayerSettings;
-import com.velocitypowered.api.proxy.player.ResourcePackInfo;
-import com.velocitypowered.api.proxy.player.TabList;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
-import com.velocitypowered.api.util.GameProfile;
-import com.velocitypowered.api.util.ModInfo;
-import net.kyori.adventure.identity.Identity;
-import net.kyori.adventure.text.Component;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import uk.co.notnull.ProxyChat.ProxyChat;
 import uk.co.notnull.ProxyChat.api.account.AccountInfo;
 import uk.co.notnull.ProxyChat.api.account.AccountManager;
 import uk.co.notnull.ProxyChat.api.account.ProxyChatAccount;
+import uk.co.notnull.ProxyChat.api.enums.AccountType;
 import uk.co.notnull.ProxyChat.api.event.ProxyChatJoinEvent;
 import uk.co.notnull.ProxyChat.api.event.ProxyChatLeaveEvent;
 
-import java.net.InetSocketAddress;
 import uk.co.notnull.ProxyChat.api.permission.Permission;
-import uk.co.notnull.ProxyChat.permission.PermissionManager;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProxyChatAccountManager extends AccountManager {
   private static final List<UUID> newPlayers = new LinkedList<>();
@@ -94,21 +79,37 @@ public class ProxyChatAccountManager extends AccountManager {
     }
   }
 
-  public static List<ProxyChatAccount> getAccountsForPartialName(
-      String partialName, CommandSource player) {
-    List<ProxyChatAccount> accounts = getAccountsForPartialName(partialName);
-
-    if (!PermissionManager.hasPermission(player, Permission.COMMAND_VANISH_VIEW)) {
-      accounts =
-          accounts.stream().filter(account -> !account.isVanished()).collect(Collectors.toList());
-    }
-
-    return accounts;
+  public static List<ProxyChatAccount> getAccountsForPartialName(String partialName, CommandSource player) {
+    ProxyChatAccount playerAccount = getAccount(player).orElseThrow();
+    return getAccountsForPartialName(partialName, playerAccount);
   }
 
-  public static List<ProxyChatAccount> getAccountsForPartialName(
-      String partialName, ProxyChatAccount account) {
-    return getAccountsForPartialName(partialName, getCommandSource(account).orElse(null));
+  public static List<ProxyChatAccount> getAccountsForPartialName(String partialName, ProxyChatAccount account) {
+    Stream<ProxyChatAccount> accounts = getAccountsForPartialName(partialName);
+
+    if (!account.hasPermission(Permission.COMMAND_VANISH_VIEW)) {
+      accounts = accounts.filter(a -> !a.equals(account)
+              && a.getAccountType() == AccountType.PLAYER
+              && !a.isVanished());
+    }
+
+    return accounts.collect(Collectors.toList());
+  }
+
+  public static List<String> getUsernamesForPartialName(String partialName, CommandSource player) {
+    ProxyChatAccount playerAccount = getAccount(player).orElseThrow();
+    return getUsernamesForPartialName(partialName, playerAccount);
+  }
+
+  public static List<String> getUsernamesForPartialName(String partialName, ProxyChatAccount account) {
+    Stream<ProxyChatAccount> accounts = getAccountsForPartialName(partialName)
+            .filter(a -> !a.equals(account) && a.getAccountType() == AccountType.PLAYER);
+
+    if (!account.hasPermission(Permission.COMMAND_VANISH_VIEW)) {
+      accounts = accounts.filter(a -> !a.isVanished());
+    }
+
+    return accounts.map(ProxyChatAccount::getName).collect(Collectors.toList());
   }
 
   public static void loadAccount(UUID uuid) {

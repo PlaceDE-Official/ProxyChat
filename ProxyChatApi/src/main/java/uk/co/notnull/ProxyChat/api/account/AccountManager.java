@@ -29,6 +29,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import lombok.Getter;
 
 public class AccountManager {
@@ -50,20 +52,10 @@ public class AccountManager {
   }
 
   public static Optional<ProxyChatAccount> getAccount(String name) {
-    List<ProxyChatAccount> accounts = getAccountsForPartialName(name);
-
-    if (accounts.size() == 1) {
-      // See if a partial match is enough to identify one player
-      return Optional.of(accounts.get(0));
-    } else {
-      // If there are several, we need to make sure the full name or UUID matches
-      return accounts.stream()
-          .filter(
-              account ->
-                  name.equalsIgnoreCase(account.getName())
-                      || name.equalsIgnoreCase(account.getUniqueId().toString()))
-          .findFirst();
-    }
+    return getAccountsForPartialName(name)
+            .filter(account -> name.equalsIgnoreCase(account.getName())
+                    || name.equalsIgnoreCase(account.getUniqueId().toString()))
+            .findFirst();
   }
 
   public static List<ProxyChatAccount> getAccounts() {
@@ -76,15 +68,14 @@ public class AccountManager {
         .collect(Collectors.toList());
   }
 
-  public static List<ProxyChatAccount> getAccountsForPartialName(String partialName) {
+  public static Stream<ProxyChatAccount> getAccountsForPartialName(String partialName) {
     final String lowercasePartialName = partialName.toLowerCase();
 
     return accounts.values().stream()
         .filter(
             account ->
                 account.getName().toLowerCase().startsWith(lowercasePartialName)
-                    || account.getUniqueId().toString().startsWith(lowercasePartialName))
-        .collect(Collectors.toList());
+                    || account.getUniqueId().toString().startsWith(lowercasePartialName));
   }
 
   public static void loadAccount(UUID uuid) {
