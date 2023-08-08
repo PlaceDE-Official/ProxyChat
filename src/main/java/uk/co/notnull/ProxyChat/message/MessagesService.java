@@ -243,9 +243,9 @@ public class MessagesService {
 	}
 
 	public void sendJoinMessage(Player player) throws InvalidContextError {
-		ProxyChatContext context = new Context(player);
+		ProxyChatContext context = new Context(player, "");
+		parseMessage(context, false);
 
-		String message = Format.JOIN_MESSAGE.getRaw(context);
 		Predicate<ProxyChatAccount> predicate = getPermissionPredicate(Permission.MESSAGE_JOIN_VIEW);
 
 		// This condition checks if the player is present and vanished
@@ -253,19 +253,18 @@ public class MessagesService {
 			predicate = predicate.and(getPermissionPredicate(Permission.COMMAND_VANISH_VIEW));
 		}
 
-		context.setMessage(message);
-
-		if(MessagesService.parseMessage(context, false)) {
-			sendToMatchingPlayers(context.getParsedMessage().orElseThrow(), predicate);
-		}
+		Predicate<ProxyChatAccount> finalPredicate = predicate;
+		preProcessMessage(context, Format.JOIN_MESSAGE)
+				.ifPresent((Component finalMessage) ->
+						sendToMatchingPlayers(finalMessage, context.getSender().orElseThrow(), finalPredicate));
 
 		ChatLoggingManager.logMessage("JOIN", context);
 	}
 
 	public void sendLeaveMessage(Player player) throws InvalidContextError {
-		ProxyChatContext context = new Context(player);
+		ProxyChatContext context = new Context(player, "");
+		parseMessage(context, false);
 
-		String message = Format.LEAVE_MESSAGE.getRaw(context);
 		Predicate<ProxyChatAccount> predicate = getPermissionPredicate(Permission.MESSAGE_LEAVE_VIEW);
 
 		// This condition checks if the player is present and vanished
@@ -273,11 +272,10 @@ public class MessagesService {
 			predicate = predicate.and(getPermissionPredicate(Permission.COMMAND_VANISH_VIEW));
 		}
 
-		context.setMessage(message);
-
-		if(MessagesService.parseMessage(context, false)) {
-			sendToMatchingPlayers(context.getParsedMessage().orElseThrow(), predicate);
-		}
+		Predicate<ProxyChatAccount> finalPredicate = predicate;
+		preProcessMessage(context, Format.LEAVE_MESSAGE)
+				.ifPresent((Component finalMessage) ->
+						sendToMatchingPlayers(finalMessage, context.getSender().orElseThrow(), finalPredicate));
 
 		ChatLoggingManager.logMessage("LEAVE", context);
 	}
@@ -324,7 +322,6 @@ public class MessagesService {
 		context.require(ProxyChatContext.HAS_SENDER, ProxyChatContext.HAS_MESSAGE, ProxyChatContext.IS_PARSED);
 
 		ProxyChatAccount account = context.getSender().orElseThrow();
-		CommandSource player = ProxyChatAccountManager.getCommandSource(account).orElseThrow();
 		Component message = ComponentUtil.filterFormatting(context.getParsedMessage().orElseThrow(), account);
 
 		if (runFilters) {
@@ -332,6 +329,7 @@ public class MessagesService {
 				message = FilterManager.applyFilters(account, message);
 			} catch (BlockMessageException e) {
 				if (!ignoreBlockMessageExceptions) {
+					CommandSource player = ProxyChatAccountManager.getCommandSource(account).orElseThrow();
 					MessagesService.sendMessage(player, e.getComponent());
 
 					return Optional.empty();
@@ -348,16 +346,15 @@ public class MessagesService {
 		context.require(ProxyChatContext.HAS_MESSAGE, ProxyChatContext.HAS_SENDER);
 
 		ProxyChatAccount playerAccount = context.getSender().orElseThrow();
-		CommandSource player = ProxyChatAccountManager.getCommandSource(playerAccount).orElseThrow();
 		String message = context.getMessage().orElseThrow();
 
-		if(runFilters) {
+		if (runFilters) {
 			try {
 				message = FilterManager.applyFilters(playerAccount, message);
 				context.setFilteredMessage(message);
 			} catch (BlockMessageException e) {
+				CommandSource player = ProxyChatAccountManager.getCommandSource(playerAccount).orElseThrow();
 				MessagesService.sendMessage(player, e.getComponent());
-
 				return false;
 			}
 		}
